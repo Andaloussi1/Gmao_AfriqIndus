@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Intervention;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\In;
@@ -16,6 +17,7 @@ class InterventionController extends Controller
      */
     public function index()
     {
+
         return Inertia::render('Interventions/index',['interventions'=>Intervention::all()]);
     }
 

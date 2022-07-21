@@ -34,6 +34,8 @@ Route::middleware([
     })->name('dashboard');
 });
 //article
+Route::post('articles',App\Http\Controllers\ArticleController::class);
+
 Route::get('/article',[App\Http\Controllers\ArticleController::class,'index'])->name('articles.index');
 Route::get('/article/create',[App\Http\Controllers\ArticleController::class,'create'])->name('articles.create');
 Route::get('/article/edit',[App\Http\Controllers\ArticleController::class,'edit'])->name('articles.edit');
@@ -41,3 +43,5 @@ Route::get('/article/edit',[App\Http\Controllers\ArticleController::class,'edit'
 Route::get('/intervention',[App\Http\Controllers\InterventionController::class,'index'])->name('interventions.index');
 Route::get('/intervention/create',[App\Http\Controllers\ArticleController::class,'create'])->name('intervention.create');
 Route::get('/intervention/edit',[App\Http\Controllers\ArticleController::class,'edit'])->name('intervention.edit');
+
+

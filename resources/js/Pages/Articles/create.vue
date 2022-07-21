@@ -1,3 +1,27 @@
+<script setup>
+
+import {Link, useForm} from '@inertiajs/inertia-vue3'
+
+import AppLayout from '@/Layouts/AppLayout.vue';
+import {Head} from "@inertiajs/inertia-vue3";
+const form = useForm({
+    ref: '',
+    nom: '',
+    prixAchat: '',
+    prixVente: '',
+    stockInit: '',
+    founisseur: '',
+    type: '',
+    emplacement: '',
+    terms: false,
+});
+
+
+const submit = () => {
+    form.post(route('articles.store'));
+};
+</script>
+
 <template>
     <AppLayout title=" Article">
         <template #header>
@@ -9,10 +33,10 @@
         <div class="flex justify-center">
             <div class="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
                 <h5 class="text-gray-900 text-xl leading-tight font-medium mb-2">Ajouter Article</h5>
-                <form>
+                <form @submit.prevent="submit" >
                     <div class="grid grid-cols-2 gap-4">
                         <div class="form-group mb-6">
-                            <input type="text" class="form-control
+                            <input v-model="form.ref" type="text" class="form-control
           block
           w-full
           px-3
@@ -30,7 +54,7 @@
                                    aria-describedby="emailHelp123" placeholder="Reference">
                         </div>
                         <div class="form-group mb-6">
-                            <input type="text" class="form-control
+                            <input v-model="form.nom" type="text" class="form-control
           block
           w-full
           px-3
@@ -50,7 +74,7 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="form-group mb-6">
-                            <input type="text" class="form-control
+                            <input  v-model="form.prixAchat" type="text" class="form-control
           block
           w-full
           px-3
@@ -68,7 +92,7 @@
                                    aria-describedby="emailHelp123" placeholder="Prix d'achat">
                         </div>
                         <div class="form-group mb-6">
-                            <input type="text" class="form-control
+                            <input v-model="form.prixVente" type="text" class="form-control
           block
           w-full
           px-3
@@ -89,7 +113,7 @@
 
                     <div class="grid grid-cols-2 gap-4">
                         <div class="form-group mb-6">
-                            <input type="text" class="form-control
+                            <input v-model="form.stockInit" type="text" class="form-control
           block
           w-full
           px-3
@@ -107,7 +131,7 @@
                                    aria-describedby="emailHelp123" placeholder="Stock Initial">
                         </div>
                         <div class="form-group mb-6">
-                            <input type="text" class="form-control
+                            <input v-model="form.founisseur" type="text" class="form-control
           block
           w-full
           px-3
@@ -128,7 +152,7 @@
 
                     <div class="grid grid-cols-2 gap-4">
                         <div class="form-group mb-6">
-                            <input type="text" class="form-control
+                            <input v-model="form.emplacement" type="text" class="form-control
           block
           w-full
           px-3
@@ -146,7 +170,7 @@
                                    aria-describedby="emailHelp123" placeholder="Emplacement">
                         </div>
                         <div class="form-group mb-6">
-                            <input type="text" class="form-control
+                            <input v-model="form.type" type="text" class="form-control
           block
           w-full
           px-3
@@ -199,12 +223,3 @@
 </template>
 
 
-
-<script setup>
-
-import { Link } from '@inertiajs/inertia-vue3'
-
-import AppLayout from '@/Layouts/AppLayout.vue';
-import {Head} from "@inertiajs/inertia-vue3";
-
-</script>

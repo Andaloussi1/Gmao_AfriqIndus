@@ -1,3 +1,21 @@
+<script setup>
+
+import { Link } from '@inertiajs/inertia-vue3'
+
+import AppLayout from '@/Layouts/AppLayout.vue';
+import {Head} from "@inertiajs/inertia-vue3";
+
+
+defineProps({
+        article:Object,
+
+})
+
+
+</script>
+
+
+
 <template>
     <AppLayout title="Articles">
         <template #header>
@@ -43,45 +61,25 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr class="bg-white border-b">
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
+                                        <tr v-for="a in article" class="bg-white border-b">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                {{ a.id }}</td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ articles }}
+                                                {{ a.nom }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                B
+                                                {{ a.marque }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                1
+                                                {{ a.prixAchat }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                2
+                                                {{ a.prixVente }}
                                             </td>
 
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                 <Link href="/article/edit" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded">Modifier
                                                 </Link>
-                                            </td>
-                                        </tr>
-
-
-                                        <tr class="bg-white border-b">
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                F
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                I
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                2
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                4
-                                            </td>
-
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                <Link href="/articles/edit" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded">Modifier</Link>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -95,11 +93,3 @@
         </div>
     </AppLayout>
 </template>
-<script setup>
-
-import { Link } from '@inertiajs/inertia-vue3'
-
-import AppLayout from '@/Layouts/AppLayout.vue';
-import {Head} from "@inertiajs/inertia-vue3";
-
-</script>

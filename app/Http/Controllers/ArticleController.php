@@ -16,7 +16,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Articles/index',['articles'=>Article::all()]);
+        $article = Article::all();
+        return Inertia::render('Articles/index',compact('article'));
 
     }
 
@@ -39,10 +40,16 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         Article::create([
+            'reference' =>$request->ref,
             'nom' => $request->nom,
             'marque' => $request->marque,
             'prixAchat' => $request->prixAchat,
             'prixVente' => $request->prixVente,
+            'type' => $request->type,
+            'emplacement' => $request->emplacement,
+            'stockInit' => $request->stockInit,
+
+
         ]);
         return Redirect::route('articles.index');
     }
