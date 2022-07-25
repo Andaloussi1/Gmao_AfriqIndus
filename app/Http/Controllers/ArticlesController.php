@@ -33,6 +33,7 @@ class ArticlesController extends Controller
             'articles' => $articles,
         ])->table(function (InertiaTable $table) {
             $table
+
                 ->column(key: 'nom', searchable: true, sortable: true, canBeHidden: false)
                 ->column(key: 'marque', searchable: true, sortable: true)
                 ->column(key: 'prixAchat', label: 'Prix d\'achat', sortable: true)

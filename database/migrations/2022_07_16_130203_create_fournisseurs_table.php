@@ -15,17 +15,16 @@ return new class extends Migration
     {
         Schema::create('fournisseurs', function (Blueprint $table) {
             $table->id();
-            $table->string('tele');
+            $table->string('tel');
             $table->string('nom');
             $table->string('email');
-            $table->double('tauxTva');
+            $table->double('tauxTVA');
             $table->string('code');
             $table->string('remarque');
             $table->string('adresse');
-            $table->string('teleSecd');
-            $table->integer('numTva');
-            $table->boolean('estActif');
-            $table->string('notreFour');
+            $table->string('teleSec');
+            $table->integer('numTVA');
+            $table->boolean('active');
             $table->timestamps();
         });
     }
