@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('code');
             $table->string('remarque');
             $table->string('adresse');
-            $table->string('teleSec');
+            $table->string('telSec');
             $table->integer('numTVA');
             $table->boolean('active');
             $table->timestamps();

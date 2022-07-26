@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Fournisseur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use ProtoneMedia\LaravelQueryBuilderInertiaJs\InertiaTable;
 use Spatie\QueryBuilder\QueryBuilder;
+
 
 
 class ArticlesController extends Controller
@@ -49,7 +51,11 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        return inertia::render('Articles/Create');
+        $fournisseurs = Fournisseur::all()->sortBy('name')
+                                          ->map->only('id','nom');
+        return inertia::render('Articles/Create', [
+            'fournisseurs' => $fournisseurs,
+        ]);
     }
 
     /**

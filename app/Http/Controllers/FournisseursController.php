@@ -73,6 +73,7 @@ class FournisseursController extends Controller
             'adresse' => $request->adresse,
             'numTVA' => $request->numTVA,
             'active' => $request->active,
+            'telSec' => $request->telSec,
 
 
 
@@ -127,6 +128,7 @@ class FournisseursController extends Controller
             'adresse' => $request->adresse,
             'numTVA' => $request->numTVA,
             'active' => $request->active,
+            'telSec' => $request->telSec,
                 ]
         );
         return Redirect::route('fournisseur.index');
