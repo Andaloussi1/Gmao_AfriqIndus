@@ -131,7 +131,7 @@ class FournisseursController extends Controller
             'telSec' => $request->telSec,
                 ]
         );
-        return Redirect::route('fournisseur.index');
+        return Redirect::route('fournisseurs.index');
     }
 
     /**
