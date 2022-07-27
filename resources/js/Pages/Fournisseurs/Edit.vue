@@ -15,12 +15,14 @@
                     <div class="grid grid-cols-2 gap-4">
 
                         <div class="form-group mb-6">
+                            <label class="text-gray-900 text-base leading-tight mb-2">Nom:</label>
                             <input type="text" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                    id="exampleInput124"
                                    v-model="form.nom"
                                    aria-describedby="emailHelp124" placeholder="Nom">
                         </div>
                         <div class="form-group mb-6">
+                            <label class="text-gray-900 text-base leading-tight mb-2">Tel:</label>
                             <input type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                    id="exampleInput123"
                                    v-model="form.tel"
@@ -29,12 +31,14 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="form-group mb-6">
+                            <label class="text-gray-900 text-base leading-tight mb-2">Email:</label>
                             <input type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                    id="exampleInput123"
                                    v-model="form.email"
                                    aria-describedby="emailHelp123" placeholder="Email">
                         </div>
                         <div class="form-group mb-6">
+                            <label class="text-gray-900 text-base leading-tight mb-2">Taux Tva:</label>
                             <input type="text" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                    id="exampleInput124"
                                    v-model="form.tauxTVA"
@@ -43,12 +47,14 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="form-group mb-6">
+                            <label class="text-gray-900 text-base leading-tight mb-2">Prix d'achat:</label>
                             <input type="number" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                    id="exampleInput123"
                                    v-model="form.prixAchat"
                                    aria-describedby="emailHelp123" placeholder="Prix d'achat">
                         </div>
                         <div class="form-group mb-6">
+                            <label class="text-gray-900 text-base leading-tight mb-2">Code :</label>
                             <input type="number" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                    id="exampleInput124"
                                    v-model="form.code"
@@ -57,12 +63,14 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="form-group mb-6">
+                            <label class="text-gray-900 text-base leading-tight mb-2">Remarque:</label>
                             <input type="number" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                    id="exampleInput123"
                                    v-model="form.remarque"
                                    aria-describedby="emailHelp123" placeholder="Remarque">
                         </div>
                         <div class="form-group mb-6">
+                            <label class="text-gray-900 text-base leading-tight mb-2">Adresse:</label>
                             <input type="number" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                    id="exampleInput124"
                                    v-model="form.adresse"
@@ -71,12 +79,14 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="form-group mb-6">
+                            <label class="text-gray-900 text-base leading-tight mb-2">Tel secondaire:</label>
                             <input type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                    id="exampleInput123"
                                    v-model="form.telSec"
                                    aria-describedby="emailHelp123" placeholder="Telephone Secondaire">
                         </div>
                         <div class="form-group mb-6">
+                            <label class="text-gray-900 text-base leading-tight mb-2">Num TVA:</label>
                             <input type="text" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                    id="exampleInput124"
                                    v-model="form.numTVA"
@@ -85,6 +95,7 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="form-group mb-6">
+                            <label class="text-gray-900 text-base leading-tight mb-2">Active:</label>
                             <input type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                    id="exampleInput123"
                                    v-model="form.active"
