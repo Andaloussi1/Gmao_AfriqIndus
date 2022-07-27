@@ -28,13 +28,35 @@ class ArticlesController extends Controller
             ->allowedSorts(['nom', 'marque', 'prixAchat', 'prixVente'])
             ->allowedFilters(['nom', 'marque','reference'])
             ->paginate()
-            ->withQueryString();
+            ->withQueryString()
+            ->through(fn ($article)=>[
+                'id'=>$article->id,
+                'nom'=>$article->nom,
+                'reference'=>$article->reference,
+                'marque'=>$article->marque,
+                'prixAchat'=>$article->prixAchat,
+                'prixVente'=>$article->prixVente,
+                'total'=>$article->total,
+                'totalHTVA'=>$article->totalHTVA,
+                'type'=>$article->type,
+                'unite'=>$article->unite,
+                'designation'=>$article->designation,
+                'stockMin'=>$article->stockMin,
+                'stockInit'=>$article->stockInit,
+                'location'=>$article->location,
+                'fournisseur'=>$article->fournisseur ? $article->fournisseur->nom:null,
+
+    
+
+            ]);
 
 
         return Inertia::render('Articles/Index', [
             'articles' => $articles,
+        
         ])->table(function (InertiaTable $table) {
             $table
+                ->column(key: 'fournisseur', searchable: true, sortable: true, canBeHidden: false)
                 ->column(key: 'nom', searchable: true, sortable: true, canBeHidden: false)
                 ->column(key: 'reference', searchable: true, sortable: true)
                 ->column(key: 'marque', searchable: true, sortable: true)
@@ -48,6 +70,7 @@ class ArticlesController extends Controller
                 ->column(key: 'stockMin', label: 'stockMin', sortable: true)
                 ->column(key: 'stockInit', label: 'stockInit', sortable: true)
                 ->column(key: 'location', label: 'location', sortable: true)
+                
                 ->column(label: 'Actions');
         });
     }
@@ -108,10 +131,10 @@ class ArticlesController extends Controller
      */
     public function show(Article $article)
     {
-        $fournisseur = Fournisseur::find($article->fournisseur_id);
+        
         return Inertia::render('Articles/Show', [
             'article' => $article,
-            'fournisseur' => $fournisseur,
+            'fournisseur'=>$article->fournisseur,
         ]);
     }
 

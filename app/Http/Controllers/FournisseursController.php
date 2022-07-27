@@ -36,7 +36,7 @@ class FournisseursController extends Controller
                 ->column(key: 'email', label: 'email', sortable: true)
                 ->column(key: 'tauxTVA', label: 'tauxTVA', sortable: true)
                 ->column(key: 'code', label: 'code', sortable: true)
-                ->column(key: 'reemail', label: 'reemail', sortable: true)
+                ->column(key: 'email', label: 'email', sortable: true)
                 ->column(key: 'adresse', label: 'adresse', sortable: true)
                 ->column(key: 'telSec', label: 'telSec', sortable: true)
                 ->column(key: 'numTVA', label: 'numTVA', sortable: true)
