@@ -36,14 +36,13 @@ class FournisseursController extends Controller
                 ->column(key: 'email', label: 'email', sortable: true)
                 ->column(key: 'tauxTVA', label: 'tauxTVA', sortable: true)
                 ->column(key: 'code', label: 'code', sortable: true)
-                ->column(key: 'reemail', label: 'reemail', sortable: true)
                 ->column(key: 'adresse', label: 'adresse', sortable: true)
                 ->column(key: 'telSec', label: 'telSec', sortable: true)
                 ->column(key: 'numTVA', label: 'numTVA', sortable: true)
                 ->column(label: 'Actions');
         });
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -73,11 +72,8 @@ class FournisseursController extends Controller
             'adresse' => $request->adresse,
             'numTVA' => $request->numTVA,
             'active' => $request->active,
-
-
-
+            'telSec' => $request->telSec,
         ]);
-
 
         return Redirect::route('fournisseurs.index');
     }
@@ -127,7 +123,8 @@ class FournisseursController extends Controller
             'adresse' => $request->adresse,
             'numTVA' => $request->numTVA,
             'active' => $request->active,
-                ]
+            'telSec' => $request->telSec,
+        ]
         );
         return Redirect::route('fournisseur.index');
     }

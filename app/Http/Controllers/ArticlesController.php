@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Fournisseur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -22,22 +23,49 @@ class ArticlesController extends Controller
     {
 
         $articles = QueryBuilder::for(Article::class)
-            ->defaultSort('nom')
+            ->defaultSort('niveauStock')
             ->allowedSorts(['nom', 'marque', 'prixAchat', 'prixVente'])
-            ->allowedFilters(['nom', 'marque'])
+            ->allowedFilters(['nom', 'marque', 'reference'])
             ->paginate()
-            ->withQueryString();
-
+            ->withQueryString()
+            ->through(fn ($article)=>[
+            'id'=>$article->id,
+            'nom'=>$article->nom,
+            'reference'=>$article->reference,
+            'marque'=>$article->marque,
+            'prixAchat'=>$article->prixAchat,
+            'prixVente'=>$article->prixVente,
+            'total'=>$article->total,
+            'totalHTVA'=>$article->totalHTVA,
+            'type'=>$article->type,
+            'unite'=>$article->unite,
+            'designation'=>$article->designation,
+            'stockMin'=>$article->stockMin,
+            'niveauStock'=>$article->niveauStock,
+            'stockInit'=>$article->stockInit,
+            'location'=>$article->location,
+            'fournisseur'=>$article->fournisseur ? $article->fournisseur->nom:null,
+        ]);
 
         return Inertia::render('Articles/Index', [
             'articles' => $articles,
         ])->table(function (InertiaTable $table) {
             $table
-
                 ->column(key: 'nom', searchable: true, sortable: true, canBeHidden: false)
+                ->column(key: 'reference', searchable: true, sortable: true)
                 ->column(key: 'marque', searchable: true, sortable: true)
                 ->column(key: 'prixAchat', label: 'Prix d\'achat', sortable: true)
                 ->column(key: 'prixVente', label: 'Prix de vente', sortable: true)
+                ->column(key: 'total', label: 'total', sortable: true)
+                ->column(key: 'totalHTVA', label: 'totalHTVA', sortable: true)
+                ->column(key: 'type', label: 'type', sortable: true)
+                ->column(key: 'unite', label: 'unite', sortable: true)
+                ->column(key: 'designation', label: 'designation', sortable: true)
+                ->column(key: 'stockMin', label: 'stockMin', sortable: true)
+                ->column(key: 'stockInit', label: 'stockInit', sortable: true)
+                ->column(key: 'niveauStock', label: 'niveauStock', sortable: true)
+                ->column(key: 'location', label: 'location', sortable: true)
+                ->column(key: 'fournisseur', searchable: true, sortable: true, canBeHidden: false)
                 ->column(label: 'Actions');
         });
     }
@@ -49,7 +77,11 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        return inertia::render('Articles/Create');
+        $fournisseurs = Fournisseur::all()->sortBy('name')
+            ->map->only('id','nom');
+        return inertia::render('Articles/Create', [
+        'fournisseurs' => $fournisseurs,
+        ]);
     }
 
     /**
@@ -76,8 +108,7 @@ class ArticlesController extends Controller
             'stockMin' => $request->stockMin,
             'stockInit' => $request->stockInit,
             'niveauStock' => $request->niveauStock,
-
-
+            'fournisseur_id'=>$request->fournisseur_id,
         ]);
 
 
@@ -95,6 +126,7 @@ class ArticlesController extends Controller
     {
         return Inertia::render('Articles/Show', [
             'article' => $article,
+            'fournisseur'=>$article->fournisseur,
         ]);
     }
 
@@ -106,8 +138,12 @@ class ArticlesController extends Controller
      */
     public function edit(Article $article)
     {
+        $fournisseurs = Fournisseur::all()->sortBy('name')
+            ->map->only('id','nom');
+
         return Inertia::render('Articles/Edit', [
             'article' => $article,
+            'fournisseurs' => $fournisseurs,
         ]);
     }
 
@@ -135,7 +171,8 @@ class ArticlesController extends Controller
             'stockMin' => $request->stockMin,
             'stockInit' => $request->stockInit,
             'niveauStock' => $request->niveauStock,
-                ]
+            'fournisseur_id'=>$request->fournisseur_id,
+        ]
         );
         return Redirect::route('articles.index');
     }

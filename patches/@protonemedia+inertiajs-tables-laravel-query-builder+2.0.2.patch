@@ -1,0 +1,16 @@
+diff --git a/node_modules/@protonemedia/inertiajs-tables-laravel-query-builder/dist/inertiajs-tables-laravel-query-builder.es.js b/node_modules/@protonemedia/inertiajs-tables-laravel-query-builder/dist/inertiajs-tables-laravel-query-builder.es.js
+index cf869b1..4aae59d 100644
+--- a/node_modules/@protonemedia/inertiajs-tables-laravel-query-builder/dist/inertiajs-tables-laravel-query-builder.es.js
++++ b/node_modules/@protonemedia/inertiajs-tables-laravel-query-builder/dist/inertiajs-tables-laravel-query-builder.es.js
+@@ -1501,7 +1501,10 @@ const _sfc_main = {
+                         ])
+                       ]),
+                       createElementVNode("tbody", _hoisted_9, [
+-                        renderSlot(_ctx.$slots, "body", { show }, () => [
++                          renderSlot(_ctx.$slots, "body", {
++                              show,
++                              columns: unref(queryBuilderProps).columns
++                          }, () => [
+                           (openBlock(true), createElementBlock(Fragment, null, renderList(unref(resourceData), (item, key) => {
+                             return openBlock(), createElementBlock("tr", {
+                               key: `table-${__props.name}-row-${key}`,

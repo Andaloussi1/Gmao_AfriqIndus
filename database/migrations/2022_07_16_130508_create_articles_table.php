@@ -31,7 +31,7 @@ return new class extends Migration
             $table->integer('niveauStock');
             $table->boolean('vente')->default(false);
             $table->boolean('location')->default(false);
-            $table->foreignId("fournisseur_id")->nullable()->constrained();
+            $table->foreignId("fournisseur_id")->constrained();
             $table->timestamps();
         });
     }
