@@ -1,5 +1,6 @@
 <template>
     <AppLayout title="Articles">
+        <template #header>
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Articles
         </h2>
@@ -7,7 +8,7 @@
             <Link href="/articles/create" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded">Créer
             </Link>
         </div>
-
+</template>
         <Table :resource="articles">
             <template #body="{show, columns}">
                 <tr
