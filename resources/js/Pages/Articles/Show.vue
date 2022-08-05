@@ -11,6 +11,22 @@
 
         </template>
 
+        <a :href="route('report',article.id)"  >
+            Telecharger
+        </a>
+
+
+        <form @submit.prevent="form.get(route('report'))" >
+
+            <div class="p-5">
+                <label for="nom">Enter your name:</label>
+                <input type='text' name="nom" class="px-2 ml-2 rounded-lg border">
+                <button type="submit" class="px-2 py-1 ml-2 rounded-lg border bg-gray-500 text-white hover:bg-black">Generate PDF</button>
+            </div>
+        </form>
+
+
+
         <body class="overflow-hidden dark:bg-gray-900">
             <div class="md:flex items-start justify-center py-12 2xl:px-20 md:px-6 px-4">
                 <div class="xl:w-2/6 lg:w-2/5 w-80 md:block hidden">
@@ -100,8 +116,16 @@ export default {
         article:Object,
         fournisseur:Object,
     },
+
+    methods:{
+        submit: function(){
+            this.$refs.form.submit()
+        },
+    },
     setup(props) {
+
         const form = useForm({
+            id: props.article.article_id,
             nom: props.article.nom,
             reference: props.article.reference,
             marque: props.article.marque,

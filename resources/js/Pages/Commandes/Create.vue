@@ -44,23 +44,18 @@
                                    aria-describedby="emailHelp124" placeholder="Adresse de Livraison">
                         </div>
                     </div>
-
                     <div class="grid gap-4">
 
                         <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Articles:</label>
-                            <label class="block text-left" style="max-width: 300px">
-                                <span class="text-gray-700">Multiselect</span>
-                                <select class="form-multiselect block w-full mt-1" multiple>
-                                    <option>Option 1</option>
-                                    <option>Option 2</option>
-                                    <option>Option 3</option>
-                                    <option>Option 4</option>
-                                    <option>Option 5</option>
-                                </select>
-                            </label>
+                            <label class="text-gray-900 text-base leading-tight mb-2">Stock:</label>
+                            <input type="text" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                   id="exampleInput124"
+                                   v-model="form.stock"
+                                   aria-describedby="emailHelp124" placeholder="quantité">
                         </div>
                     </div>
+
+
 
 
 
@@ -151,6 +146,7 @@ export default {
             total: "",
             totalHTVA: "",
             article_id: "",
+            stock:""
         });
         return {form};
     },

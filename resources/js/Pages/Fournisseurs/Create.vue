@@ -78,20 +78,26 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Est actif</label>
+                            <label class="text-gray-900 text-base leading-tight mb-2">Activité</label>
                             <input type="number" max="1" min="0" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                    id="exampleInput123"
                                    v-model="form.active"
-                                   aria-describedby="emailHelp123" placeholder="1 ou 0">
+                                   aria-describedby="emailHelp123" placeholder="Actif ou Inactif">
                         </div>
                     </div>
                     <div class="grid gap-4">
                         <div class="form-group mb-6">
                             <label class="text-gray-900 text-base leading-tight mb-2">Remarque:</label>
-                            <input type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput123"
-                                   v-model="form.remarque"
-                                   aria-describedby="emailHelp123" placeholder="Remarque">
+                            <textarea class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                      id="exampleInput123"
+                                      v-model="form.remarque"
+                                      aria-describedby="emailHelp123" placeholder="Remarque"
+
+                            >
+
+                            </textarea>
+
+
                         </div>
                     </div>
                     <button type="submit"  class="w-full

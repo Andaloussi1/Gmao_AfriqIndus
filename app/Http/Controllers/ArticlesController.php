@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Fournisseur;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use phpDocumentor\Reflection\DocBlock\Tags\Reference\Reference;
 use ProtoneMedia\LaravelQueryBuilderInertiaJs\InertiaTable;
 use Spatie\QueryBuilder\QueryBuilder;
+use Barryvdh\DomPDF\PDF as PDF1;
+
 
 
 class ArticlesController extends Controller
@@ -75,6 +79,33 @@ class ArticlesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
+    public function pdf(){
+
+        $articles = Article::all();
+
+        $pdf = PDF1::loadView('',$articles);
+        return $pdf->stream();
+    }
+
+    public function report(Request $request, $id){
+        $nom = $request->input('nom');
+        $articles = Article::all()->where('id',$id);
+
+
+        $pdf=app('dompdf.wrapper');
+        $pdf->getDomPDF()->set_option("enable_php",true);
+        $pdf->loadView('report',compact('articles','nom'));
+
+        return $pdf->download('articles.pdf');
+
+    }
+
+
+
+
     public function create()
     {
         $fournisseurs = Fournisseur::all()->sortBy('name')
@@ -83,6 +114,10 @@ class ArticlesController extends Controller
         'fournisseurs' => $fournisseurs,
         ]);
     }
+
+
+
+
 
     /**
      * Store a newly created resource in storage.
