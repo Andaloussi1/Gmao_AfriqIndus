@@ -39,8 +39,6 @@ class ArticlesController extends Controller
             'marque'=>$article->marque,
             'prixAchat'=>$article->prixAchat,
             'prixVente'=>$article->prixVente,
-            'total'=>$article->total,
-            'totalHTVA'=>$article->totalHTVA,
             'type'=>$article->type,
             'unite'=>$article->unite,
             'designation'=>$article->designation,
@@ -60,8 +58,6 @@ class ArticlesController extends Controller
                 ->column(key: 'marque', searchable: true, sortable: true)
                 ->column(key: 'prixAchat', label: 'Prix d\'achat', sortable: true)
                 ->column(key: 'prixVente', label: 'Prix de vente', sortable: true)
-                ->column(key: 'total', label: 'total', sortable: true)
-                ->column(key: 'totalHTVA', label: 'totalHTVA', sortable: true)
                 ->column(key: 'type', label: 'type', sortable: true)
                 ->column(key: 'unite', label: 'unite', sortable: true)
                 ->column(key: 'designation', label: 'designation', sortable: true)

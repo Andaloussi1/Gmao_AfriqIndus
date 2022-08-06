@@ -1,29 +1,17 @@
 <template>
 
     <AppLayout title=" Article">
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                informations du {{form.reference}} :
-            </h2>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                informations du {{form.reference}} :
-            </h2>
 
-        </template>
 
-        <a :href="route('report',article.id)"  >
-            Telecharger
+        <a :href="route('report',article.id)">
+
+            <i class="fa fa-file-pdf-o" ></i>
+                Fiche Technique PDF
+
+
         </a>
 
 
-        <form @submit.prevent="form.get(route('report'))" >
-
-            <div class="p-5">
-                <label for="nom">Enter your name:</label>
-                <input type='text' name="nom" class="px-2 ml-2 rounded-lg border">
-                <button type="submit" class="px-2 py-1 ml-2 rounded-lg border bg-gray-500 text-white hover:bg-black">Generate PDF</button>
-            </div>
-        </form>
 
 
 
