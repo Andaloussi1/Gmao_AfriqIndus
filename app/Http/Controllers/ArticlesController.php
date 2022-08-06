@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Fournisseur;
+use App\Models\Media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -93,7 +94,7 @@ class ArticlesController extends Controller
     public function store(Request $request)
     {
 
-        Article::create([
+        $article = Article::create([
             'nom' => $request->nom,
             'reference' =>$request->reference,
             'marque' => $request->marque,
@@ -109,6 +110,11 @@ class ArticlesController extends Controller
             'stockInit' => $request->stockInit,
             'niveauStock' => $request->niveauStock,
             'fournisseur_id'=>$request->fournisseur_id,
+        ]);
+
+        Media::find($request->mediaIds)->each->update([
+           'model_id' => $article->id,
+            'model_type' => Article::class
         ]);
 
 

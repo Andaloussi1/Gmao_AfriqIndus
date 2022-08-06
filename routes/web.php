@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MediaController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,6 +35,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::resource('articles', ArticlesController::class);
+    Route::resource('media', MediaController::class);
     Route::resource('commandes', CommandesController::class);
     Route::resource('fournisseurs', FournisseursController::class);
     Route::get('/dashboard', function () {
