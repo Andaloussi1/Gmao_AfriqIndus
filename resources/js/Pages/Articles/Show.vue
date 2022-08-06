@@ -1,12 +1,19 @@
 <template>
 
     <AppLayout title=" Article">
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                informations du {{form.reference}} :
-            </h2>
 
-        </template>
+
+        <a :href="route('report',article.id)">
+
+            <i class="fa fa-file-pdf-o" ></i>
+                Fiche Technique PDF
+
+
+        </a>
+
+
+
+
 
         <body class="overflow-hidden dark:bg-gray-900">
             <div class="md:flex items-start justify-center py-12 2xl:px-20 md:px-6 px-4">
@@ -97,8 +104,16 @@ export default {
         article:Object,
         fournisseur:Object,
     },
+
+    methods:{
+        submit: function(){
+            this.$refs.form.submit()
+        },
+    },
     setup(props) {
+
         const form = useForm({
+            id: props.article.article_id,
             nom: props.article.nom,
             reference: props.article.reference,
             marque: props.article.marque,

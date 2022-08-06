@@ -1,3 +1,22 @@
+<script setup >
+import {Link} from '@inertiajs/inertia-vue3'
+import AppLayout from '@/Layouts/AppLayout.vue'
+import { Table } from "@protonemedia/inertiajs-tables-laravel-query-builder";
+import {Inertia} from "@inertiajs/inertia";
+
+
+
+defineProps(["articles"]);
+
+const destroy=(id)=>{
+    if(confirm('Êtes-vous sûr?')){
+        Inertia.delete(route('articles.destroy',id))
+    }
+}
+
+
+</script>
+
 <template>
     <AppLayout title="Articles">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -7,6 +26,7 @@
             <Link href="/articles/create" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded">Créer
             </Link>
         </div>
+
 
         <Table :resource="articles">
             <template #body="{show, columns}">
@@ -42,19 +62,4 @@
 
     </AppLayout>
 </template>
-<script setup>
-import {Link} from '@inertiajs/inertia-vue3'
-import AppLayout from '@/Layouts/AppLayout.vue'
-import { Table } from "@protonemedia/inertiajs-tables-laravel-query-builder";
-import {Inertia} from "@inertiajs/inertia";
 
-defineProps(["articles"]);
-
-const destroy=(id)=>{
-    if(confirm('Êtes-vous sûr?')){
-        Inertia.delete(route('articles.destroy',id))
-    }
-}
-
-
-</script>

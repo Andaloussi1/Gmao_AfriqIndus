@@ -41,4 +41,15 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+    Route::get('/report/{id}',[ArticlesController::class,'report'])
+        ->name('report');
+
+
 });
+
+
+Route::get('pdf',[ArticlesController::class,'pdf'])
+    ->name('pdf');
+Route::get('view-pdf', [ArticlesController::class,'viewPDf'])->name('viewPDF');
+
+

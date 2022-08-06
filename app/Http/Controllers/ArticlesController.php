@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Fournisseur;
 use App\Models\Media;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use phpDocumentor\Reflection\DocBlock\Tags\Reference\Reference;
 use ProtoneMedia\LaravelQueryBuilderInertiaJs\InertiaTable;
 use Spatie\QueryBuilder\QueryBuilder;
+use Barryvdh\DomPDF\PDF as PDF1;
+
 
 
 class ArticlesController extends Controller
@@ -36,8 +40,6 @@ class ArticlesController extends Controller
             'marque'=>$article->marque,
             'prixAchat'=>$article->prixAchat,
             'prixVente'=>$article->prixVente,
-            'total'=>$article->total,
-            'totalHTVA'=>$article->totalHTVA,
             'type'=>$article->type,
             'unite'=>$article->unite,
             'designation'=>$article->designation,
@@ -57,8 +59,6 @@ class ArticlesController extends Controller
                 ->column(key: 'marque', searchable: true, sortable: true)
                 ->column(key: 'prixAchat', label: 'Prix d\'achat', sortable: true)
                 ->column(key: 'prixVente', label: 'Prix de vente', sortable: true)
-                ->column(key: 'total', label: 'total', sortable: true)
-                ->column(key: 'totalHTVA', label: 'totalHTVA', sortable: true)
                 ->column(key: 'type', label: 'type', sortable: true)
                 ->column(key: 'unite', label: 'unite', sortable: true)
                 ->column(key: 'designation', label: 'designation', sortable: true)
@@ -76,6 +76,33 @@ class ArticlesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
+    public function pdf(){
+
+        $articles = Article::all();
+
+        $pdf = PDF1::loadView('',$articles);
+        return $pdf->stream();
+    }
+
+    public function report(Request $request, $id){
+        $nom = $request->input('nom');
+        $articles = Article::all()->where('id',$id);
+
+
+        $pdf=app('dompdf.wrapper');
+        $pdf->getDomPDF()->set_option("enable_php",true);
+        $pdf->loadView('report',compact('articles','nom'));
+
+        return $pdf->download('articles.pdf');
+
+    }
+
+
+
+
     public function create()
     {
         $fournisseurs = Fournisseur::all()->sortBy('name')
@@ -84,6 +111,10 @@ class ArticlesController extends Controller
         'fournisseurs' => $fournisseurs,
         ]);
     }
+
+
+
+
 
     /**
      * Store a newly created resource in storage.
