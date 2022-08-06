@@ -13,7 +13,45 @@ class InterventionsController extends Controller
      */
     public function index()
     {
-        //
+        $interventions = QueryBuilder::for(Intervention::class)
+        ->defaultSort('dateFin')
+        ->allowedSorts(['titre', 'dateFin', 'desc', 'status'])
+        ->allowedFilters(['dateDb','dateFin'])
+        ->paginate()
+        ->withQueryString()
+        ->through(fn ($intervention)=>[
+        'id'=>$intervention->id,
+        'titre'=>$intervention->titre,
+        'dateFin'=>$intervention->dateFin,
+        'desc'=>$intervention->desc,
+        'status'=>$intervention->status,
+        'dateDb'=>$intervention->dateDb,
+        'dateFin'=>$intervention->dateFin,
+        'datFinHTVA'=>$intervention->datFinHTVA,
+        'emplacement'=>$intervention->emplacement,
+        'type'=>$intervention->type,
+        'unite'=>$intervention->unite,
+        'unite'=>$intervention->unite,
+        'location'=>$intervention->location,
+        'interventions'=>$intervention->interventions ? $intervention->interventions->titre:null,
+    ]);
+
+    return Inertia::render('Interventions/Index', [
+        'interventions' => $interventions,
+    ])->table(function (InertiaTable $table) {
+        $table
+            ->column(key: 'titre', searchable: true, sortable: true, canBeHidden: false)
+            ->column(key: 'dateFin', searchable: true, sortable: true)
+            ->column(key: 'desc', searchable: true, sortable: true)
+            ->column(key: 'status', label: 'status', sortable: true)
+            ->column(key: 'dateDb', label: 'dateDb', sortable: true)
+            ->column(key: 'dateFin', label: 'dateFin', sortable: true)
+            ->column(key: 'datFinHTVA', label: 'datFinHTVA', sortable: true)
+            ->column(key: 'emplacement', label: 'emplacement', sortable: true)
+            ->column(key: 'type', label: 'type', sortable: true)
+            ->column(key: 'unite', label: 'unite', sortable: true)
+            ->column(label: 'Actions');
+    });
     }
 
     /**
@@ -23,7 +61,7 @@ class InterventionsController extends Controller
      */
     public function create()
     {
-        //
+        return inertia::render('Interventions/Create');
     }
 
     /**
@@ -34,7 +72,21 @@ class InterventionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        interventions::create([
+            'titre' => $request->titre,
+            'type' =>$request->type,
+            'desc' => $request->desc,
+            'status' => $request->status,
+            'dateDb' => $request->dateDb,
+            'datFin' => $request->datFin,
+            'totalHTVA' => $request->totalHTVA,
+            'emplacement' => $request->emplacement,
+            'type' => $request->type,
+            'unite' => $request->unite,
+        ]);
+
+
+        return Redirect::route('interventions.index');
     }
 
     /**
@@ -45,7 +97,9 @@ class InterventionsController extends Controller
      */
     public function show($id)
     {
-        //
+        return Inertia::render('Interventions/Show', [
+            'interventions' => $interventions,
+        ]);
     }
 
     /**
@@ -56,7 +110,10 @@ class InterventionsController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        return Inertia::render('Interventions/Edit', [
+            'interventions' => $interventions,
+        ]);
     }
 
     /**
@@ -68,7 +125,20 @@ class InterventionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $intervention->update([
+            'titre' => $request->titre,
+            'type' =>$request->type,
+            'desc' => $request->desc,
+            'status' => $request->status,
+            'dateDb' => $request->dateDb,
+            'datFin' => $request->datFin,
+            'totalHTVA' => $request->totalHTVA,
+            'emplacement' => $request->emplacement,
+            'type' => $request->type,
+            'unite' => $request->unite,
+        ]
+        );
+        return Redirect::route('interventions.index');
     }
 
     /**
@@ -79,6 +149,8 @@ class InterventionsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $intervention->delete();
+
+        return Redirect::route('interventions.index');
     }
 }

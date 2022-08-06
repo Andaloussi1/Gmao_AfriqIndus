@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 
 class Article extends Model
 {
@@ -16,13 +17,13 @@ class Article extends Model
 
     }
 
-    public function intervention(): BelongsToMany
+    public function interventions(): BelongsToMany
     {
         return $this->belongsToMany(Intervention::class);
 
     }
 
-    public function commande(): BelongsToMany
+    public function commandes(): BelongsToMany
     {
         return $this->belongsToMany(Commande::class);
 
