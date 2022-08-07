@@ -10,10 +10,9 @@
 
         <div class="flex justify-center">
             <div class="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
-                <h5 class="text-gray-900 text-xl leading-tight font-medium mb-2">Modifier.fournisseur</h5>
+                <h5 class="text-gray-900 text-xl leading-tight font-medium mb-2">Modifier fournisseur</h5>
                 <form @submit.prevent="form.put(route('fournisseurs.update',fournisseur.id))">
                     <div class="grid grid-cols-2 gap-4">
-
                         <div class="form-group mb-6">
                             <label class="text-gray-900 text-base leading-tight mb-2">Nom:</label>
                             <input type="text" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
@@ -95,11 +94,14 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Active:</label>
-                            <input type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput123"
-                                   v-model="form.active"
-                                   aria-describedby="emailHelp123" placeholder="EST ACTIVE ">
+                            <label class="text-gray-900 text-base leading-tight mb-2">Activité</label>
+                            <select class="form-select block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    id="exampleInput123"
+                                    v-model="form.active"
+                                    aria-describedby="emailHelp123" placeholder="Actif ou Inactif">
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
                         </div>
                     </div>
 

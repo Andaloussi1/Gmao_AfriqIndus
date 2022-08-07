@@ -38,10 +38,16 @@
                         </div>
                         <div class="form-group mb-6">
                             <label class="text-gray-900 text-base leading-tight mb-2">Type:</label>
-                            <input type="text" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput124"
-                                   v-model="form.type"
-                                   aria-describedby="emailHelp124" placeholder="Type">
+                            <select class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    id="exampleInput124"
+                                    v-model="form.type"
+                                    aria-describedby="emailHelp124">
+                                <option value="Mécanique">Mécanique</option>
+                                <option value="Électrique">Électrique</option>
+                                <option value="Automatique">Automatique</option>
+                                <option value="Sanitaire">Sanitaire</option>
+                                <option value="Plomberie">Plomberie</option>
+                            </select>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-4">

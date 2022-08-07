@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('status');
             $table->double('total');
             $table->double('totalHTVA');
+            $table->unsignedBigInteger('article_id');
             $table->timestamps();
         });
     }

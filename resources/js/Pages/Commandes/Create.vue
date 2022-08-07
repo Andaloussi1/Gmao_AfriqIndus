@@ -35,7 +35,16 @@
 
 
                     <div class="grid gap-4">
-
+                        <div class="form-group mb-6">
+                            <label class="text-gray-900 text-base leading-tight mb-2">Articles:</label>
+                            <select class="form-select block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    v-model="form.article_id"
+                                    aria-describedby="emailHelp124">
+                                <option v-for="article in articles" :key="article.id" :value="article.id" >
+                                    {{article.nom}}
+                                </option>
+                            </select>
+                        </div>
                         <div class="form-group mb-6">
                             <label class="text-gray-900 text-base leading-tight mb-2">Adresse de Livraison:</label>
                             <input type="text" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
@@ -132,7 +141,7 @@ import {useForm, Link} from '@inertiajs/inertia-vue3'
 import AppLayout from '@/Layouts/AppLayout.vue'
 export default {
     props:{
-        commande:Object,
+        articles:Object,
     },
     setup() {
         const form = useForm({

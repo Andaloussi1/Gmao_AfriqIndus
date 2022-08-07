@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('adresse');
             $table->string('telSec');
             $table->integer('numTVA');
-            $table->boolean('active');
+            $table->enum('active',['active','inactive']);
             $table->timestamps();
         });
     }

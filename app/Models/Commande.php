@@ -9,7 +9,7 @@ class Commande extends Model
 {
     use HasFactory;
 
-    protected $fillable=['titre','description','adresseLivraison','dateCommande','dateLivraison','status','total','totalHTVA'];
+    protected $fillable=['titre','description','adresseLivraison','dateCommande','dateLivraison','status','total','totalHTVA','article_id'];
 
     public function article(): BelongsToMany
     {

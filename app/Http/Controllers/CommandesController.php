@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Commande;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -50,7 +51,11 @@ class CommandesController extends Controller
      */
     public function create()
     {
-        return inertia::render('Commandes/Create');
+        $articles = Article::all()->sortBy('name')
+            ->map->only('id','nom');
+        return inertia::render('Commandes/Create', [
+            'articles' => $articles,
+        ]);
     }
 
     /**
@@ -70,6 +75,7 @@ class CommandesController extends Controller
             'status' => $request->status,
             'total' => $request->total,
             'totalHTVA' => $request->totalHTVA,
+            'article_id'=>$request->article_id,
 
 
 
@@ -101,8 +107,12 @@ class CommandesController extends Controller
      */
     public function edit(Commande $commande)
     {
+        $articles = Article::all()->sortBy('name')
+            ->map->only('id','nom');
+
         return Inertia::render('Commandes/Edit', [
             'commande' => $commande,
+            'articles' => $articles,
         ]);
     }
 
@@ -116,15 +126,17 @@ class CommandesController extends Controller
     public function update(Request $request, Commande $commande)
     {
         $commande->update([
-            'titre' => $request->titre,
-            'description' =>$request->description,
-            'adresseLivraison' => $request->adresseLivraison,
-            'dateCommande' => $request->dateCommande,
-            'dateLivraison' => $request->dateLivraison,
-            'status' => $request->status,
-            'total' => $request->total,
-            'totalHTVA' => $request->totalHTVA,
-                ]
+                'titre' => $request->titre,
+                'description' =>$request->description,
+                'article_id' =>$request->article_id,
+                'adresseLivraison' => $request->adresseLivraison,
+                'stock' =>$request->stock,
+                'dateCommande' => $request->dateCommande,
+                'dateLivraison' => $request->dateLivraison,
+                'total' => $request->total,
+                'totalHTVA' => $request->totalHTVA,
+                'status' => $request->status,
+            ]
         );
         return Redirect::route('commandes.index');
     }
