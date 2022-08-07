@@ -18,16 +18,16 @@
         <body class="overflow-hidden dark:bg-gray-900">
             <div class="md:flex items-start justify-center py-12 2xl:px-20 md:px-6 px-4">
                 <div class="xl:w-2/6 lg:w-2/5 w-80 md:block hidden">
-                    <img class="w-full" alt="image of a girl posing" src="https://media.istockphoto.com/photos/bearings-tool-picture-id512701554" />
-                    <img class="mt-6 w-full" alt="image of a girl posing" src=" https://media.istockphoto.com/photos/roller-and-ball-bearings-on-white-background-blank-for-creativity-picture-id1349662420" />
+                    <img class="w-full" alt="image of a girl posing" :src=url />
+                    <img class="mt-6 w-full" alt="image of a girl posing" :src=url />
                 </div>
                 <div class="md:hidden">
-                    <img class="w-full" alt="image of a girl posing" src="https://i.ibb.co/QMdWfzX/component-image-one.png" />
+                    <img class="w-full" alt="image of a girl posing" :src=url />
                     <div class="flex items-center justify-between mt-3 space-x-4 md:space-x-0">
-                        <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" src="https://i.ibb.co/cYDrVGh/Rectangle-245.png" />
-                        <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" src="https://i.ibb.co/f17NXrW/Rectangle-244.png" />
-                        <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" src="https://i.ibb.co/cYDrVGh/Rectangle-245.png" />
-                        <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" src="https://i.ibb.co/f17NXrW/Rectangle-244.png" />
+                        <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" :src=url />
+                        <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" :src=url />
+                        <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" :src=url />
+                        <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" :src=url />
                     </div>
                 </div>
                 <div class="xl:w-2/5 md:w-1/2 lg:ml-8 md:ml-6 md:mt-0 mt-6">
@@ -103,6 +103,7 @@ export default {
     props:{
         article:Object,
         fournisseur:Object,
+        url:String,
     },
 
     methods:{

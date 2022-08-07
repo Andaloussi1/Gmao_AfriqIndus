@@ -137,22 +137,7 @@
                         </div>
                     </div>
 
-                    <file-input @input="uploadMedia"></file-input>
-                    <div v-if="media.length">
-                        <div class="relative flex flex-col items-center justify-center" v-for="(item, index) in media">
-                            <button
-                                type="button"
-                                @click="removeMedia(index, item)"
-                                class="m-1 absolute top-0 left-0 text-white bg-black bg-opacity-75 rounded-full cursor-pointer hover:bg-opacity-100"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </button>
-                            <img :src="item.url" />
-                            <div class="absolute bg-black bg-opacity-75 text-sm rounded px-2 text-white" v-if="item.loading">Loading...</div>
-                        </div>
-                    </div>
+                    <input type="file" id="image" name="image" @input="form.image = $event.target.files[0]">
 
                     <button type="submit" class="w-full
                                                  px-6
@@ -196,40 +181,8 @@ export default {
         return{media: [],}
     },
     methods: {
-        uploadMedia(files) {
-            Array.from(files).forEach((media) => {
-                let reader = new FileReader();
-                reader.readAsDataURL(media);
-                reader.onload = (e) => {
-                    let item = {
-                        url: e.target.result,
-                        id: undefined,
-                        loading: false,
-                    }
-                    let formData = new FormData();
-                    formData.append('file', media)
-                    axios.post(route('media.store'), formData)
-                        .then(({data}) => {
-                            item.id = data.id;
-                        })
-                        .finally(() => item.loading = false)
-                    this.media.push(item)
-                }
-            });
-        },
-        removeMedia(index, item) {
-            this.media.splice(index, 1);
-
-            if(item.id) {
-                axios.delete(route('media.destroy', item.id)).then((e) => {
-                    console.log(e);
-                })
-            }
-        },
         submit() {
-            this.form.mediaIds = this.media.map(item => item.id);
             Inertia.post(route('articles.store'), this.form);
-            console.log('test');
         },
     },
 
