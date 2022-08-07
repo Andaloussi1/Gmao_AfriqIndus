@@ -11,7 +11,7 @@
         <div class="flex justify-center">
             <div class="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
                 <h3  class="text-center text-gray-900 text-xl leading-tight font-medium mb-2">Ajouter un Article</h3><br>
-                <form @submit.prevent="form.post(route('articles.store'))">
+                <form @submit.prevent="submit">
                     <div class="grid grid-cols-2 gap-4">
                         <div class="form-group mb-6">
                             <label class="text-gray-900 text-base leading-tight mb-2">Reference:</label>
@@ -137,6 +137,8 @@
                         </div>
                     </div>
 
+                    <input type="file" id="image" name="image" @input="form.image = $event.target.files[0]">
+
                     <button type="submit" class="w-full
                                                  px-6
                                                  py-2.5
@@ -168,12 +170,22 @@ import {reactive} from 'vue'
 import {Inertia} from '@inertiajs/inertia'
 import {useForm, Link} from '@inertiajs/inertia-vue3'
 import AppLayout from '@/Layouts/AppLayout.vue'
+import FileInput from '../../Components/FileInput.vue'
 
 
 export default {
     props:{
         fournisseurs:Object,
     },
+    data() {
+        return{media: [],}
+    },
+    methods: {
+        submit() {
+            Inertia.post(route('articles.store'), this.form);
+        },
+    },
+
     setup() {
         const form = useForm({
             nom: "",
@@ -191,10 +203,13 @@ export default {
             stockInit: "",
             niveauStock: "",
             fournisseur_id:"",
+            mediaIds: []
         });
         return {form};
     },
-    components: {Link, AppLayout},
+
+
+    components: {Link, AppLayout, FileInput},
 }
 </script>
 

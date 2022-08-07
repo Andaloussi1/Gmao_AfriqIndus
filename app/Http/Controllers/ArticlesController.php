@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Fournisseur;
+use App\Models\Media;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -124,7 +125,7 @@ class ArticlesController extends Controller
     public function store(Request $request)
     {
 
-        Article::create([
+        $article = Article::create([
             'nom' => $request->nom,
             'reference' =>$request->reference,
             'marque' => $request->marque,
@@ -142,6 +143,8 @@ class ArticlesController extends Controller
             'fournisseur_id'=>$request->fournisseur_id,
         ]);
 
+        $article->addMediaFromRequest('image')->toMediaCollection();
+
 
         return Redirect::route('articles.index');
     }
@@ -155,9 +158,11 @@ class ArticlesController extends Controller
      */
     public function show(Article $article)
     {
+        $image_url = $article->getFirstMediaUrl();
         return Inertia::render('Articles/Show', [
             'article' => $article,
-            'fournisseur'=>$article->fournisseur,
+            'fournisseur'=> $article->fournisseur,
+            'url' => $image_url,
         ]);
     }
 
