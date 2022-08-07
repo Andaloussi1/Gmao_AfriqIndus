@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Commande;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Article;
 use Inertia\Inertia;
 use ProtoneMedia\LaravelQueryBuilderInertiaJs\InertiaTable;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -25,6 +26,7 @@ class CommandesController extends Controller
             ->allowedFilters(['titre', 'adresseLivraison'])
             ->paginate()
             ->withQueryString();
+
 
 
         return Inertia::render('Commandes/Index', [
@@ -50,7 +52,11 @@ class CommandesController extends Controller
      */
     public function create()
     {
-        return inertia::render('Commandes/Create');
+        $articles = Article::all()->sortBy('nom')
+            ->map->only('id','nom');
+        return inertia::render('Commandes/Create',[
+            'articles' => $articles,
+        ]);
     }
 
     /**
@@ -61,7 +67,8 @@ class CommandesController extends Controller
      */
     public function store(Request $request)
     {
-        Commande::create([
+        
+        $commande = Commande::create([
             'titre' => $request->titre,
             'description' =>$request->description,
             'adresseLivraison' => $request->adresseLivraison,
@@ -70,11 +77,11 @@ class CommandesController extends Controller
             'status' => $request->status,
             'total' => $request->total,
             'totalHTVA' => $request->totalHTVA,
-
-
-
-
         ]);
+
+        $commande->articles()->attach($request->articles);
+
+
 
 
         return Redirect::route('commandes.index');
@@ -124,6 +131,7 @@ class CommandesController extends Controller
             'status' => $request->status,
             'total' => $request->total,
             'totalHTVA' => $request->totalHTVA,
+            'article_id'=>$request->article_id,
                 ]
         );
         return Redirect::route('commandes.index');
@@ -137,7 +145,11 @@ class CommandesController extends Controller
      */
     public function destroy(Commande $commande)
     {
+
+        $commande->articles()->detach();
         $commande->delete();
+
+
 
         return Redirect::route('commandes.index');
     }

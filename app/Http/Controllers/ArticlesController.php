@@ -105,7 +105,7 @@ class ArticlesController extends Controller
 
     public function create()
     {
-        $fournisseurs = Fournisseur::all()->sortBy('name')
+        $fournisseurs = Fournisseur::all()->sortBy('nom')
             ->map->only('id','nom');
         return inertia::render('Articles/Create', [
         'fournisseurs' => $fournisseurs,

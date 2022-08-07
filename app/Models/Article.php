@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Article extends Model implements HasMedia
 {
@@ -22,13 +23,13 @@ class Article extends Model implements HasMedia
 
     }
 
-    public function intervention(): BelongsToMany
+    public function interventions(): BelongsToMany
     {
         return $this->belongsToMany(Intervention::class);
 
     }
 
-    public function commande(): BelongsToMany
+    public function commandes(): BelongsToMany
     {
         return $this->belongsToMany(Commande::class);
 
