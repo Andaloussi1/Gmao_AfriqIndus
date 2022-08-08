@@ -143,7 +143,9 @@ class ArticlesController extends Controller
             'fournisseur_id'=>$request->fournisseur_id,
         ]);
 
-        $article->addMediaFromRequest('image')->toMediaCollection();
+        $article->addAllMediaFromRequest('image')->each(function ($fileAdder) {
+            $fileAdder->toMediaCollection();
+        });
 
 
         return Redirect::route('articles.index');
@@ -158,11 +160,14 @@ class ArticlesController extends Controller
      */
     public function show(Article $article)
     {
-        $image_url = $article->getFirstMediaUrl();
+        $image_urls = $article->getMedia()->map(function ($image) {
+            return $image->getUrl();
+        });
+
         return Inertia::render('Articles/Show', [
             'article' => $article,
             'fournisseur'=> $article->fournisseur,
-            'url' => $image_url,
+            'urls' => $image_urls,
         ]);
     }
 

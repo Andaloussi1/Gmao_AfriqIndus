@@ -137,7 +137,7 @@
                         </div>
                     </div>
 
-                    <input type="file" id="image" name="image" @input="form.image = $event.target.files[0]">
+                    <input type="file" id="image" name="image" @input="form.images = $event.target.files" multiple>
 
                     <button type="submit" class="w-full
                                                  px-6
@@ -203,7 +203,7 @@ export default {
             stockInit: "",
             niveauStock: "",
             fournisseur_id:"",
-            mediaIds: []
+            images: []
         });
         return {form};
     },
