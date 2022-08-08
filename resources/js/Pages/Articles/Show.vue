@@ -18,16 +18,16 @@
         <body class="overflow-hidden dark:bg-gray-900">
             <div class="md:flex items-start justify-center py-12 2xl:px-20 md:px-6 px-4">
                 <div class="xl:w-2/6 lg:w-2/5 w-80 md:block hidden">
-                    <img class="w-full" alt="image of a girl posing" :src=url />
-                    <img class="mt-6 w-full" alt="image of a girl posing" :src=url />
+                    <img class="w-full" alt="image of a girl posing" :src=urls[0] />
+                    <img class="mt-6 w-full" alt="image of a girl posing" :src=urls[1] />
                 </div>
                 <div class="md:hidden">
-                    <img class="w-full" alt="image of a girl posing" :src=url />
+                    <img class="w-full" alt="image of a girl posing" :src=urls[0] />
                     <div class="flex items-center justify-between mt-3 space-x-4 md:space-x-0">
-                        <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" :src=url />
-                        <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" :src=url />
-                        <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" :src=url />
-                        <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" :src=url />
+                        <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" :src=urls[0] />
+                        <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" :src=urls[1] />
+                        <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" :src=urls[0] />
+                        <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" :src=urls[1] />
                     </div>
                 </div>
                 <div class="xl:w-2/5 md:w-1/2 lg:ml-8 md:ml-6 md:mt-0 mt-6">
@@ -74,11 +74,11 @@
                             <div @click="showList" data-menu class="flex justify-between items-center cursor-pointer">
                                 <p class="text-base leading-4 text-gray-800 dark:text-gray-300">Autres informations</p>
                                 <button  class="cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 rounded" role="button" aria-label="show or hide">
-                                    <img v-if="showData===false" class="transform dark:hidden" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/productDetail3-svg4.svg" alt="dropdown">
-                                    <img v-if="showData===true" class="transform dark:hidden rotate-180" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/productDetail3-svg4.svg" alt="dropdown">
+                                    <img class="transform dark:hidden" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/productDetail3-svg4.svg" alt="dropdown">
+                                    <img  class="transform dark:hidden rotate-180" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/productDetail3-svg4.svg" alt="dropdown">
                                 </button>
                             </div>
-                            <div v-if="showData" class=" pt-4 text-base leading-normal pr-12 mt-4 text-gray-600 dark:text-gray-300" id="sect">
+                            <div class=" pt-4 text-base leading-normal pr-12 mt-4 text-gray-600 dark:text-gray-300" id="sect">
                                 <p class="text-base leading-4 mt-2 text-gray-600 dark:text-gray-300">Stock initiale: {{form.stockInit}}</p>
                                 <p class="text-base leading-4 mt-7 text-gray-600 dark:text-gray-300">Stock minimale: {{form.stockMin}}</p>
                                 <p class="text-base leading-4 mt-7 text-gray-600 dark:text-gray-300">Total hors TVA: {{form.totalHtva}}</p>
@@ -103,7 +103,7 @@ export default {
     props:{
         article:Object,
         fournisseur:Object,
-        url:String,
+        urls:Array,
     },
 
     methods:{
