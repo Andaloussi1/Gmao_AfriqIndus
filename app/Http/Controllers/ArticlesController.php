@@ -143,7 +143,7 @@ class ArticlesController extends Controller
             'fournisseur_id'=>$request->fournisseur_id,
         ]);
 
-        $article->addAllMediaFromRequest('image')->each(function ($fileAdder) {
+        $article->addAllMediaFromRequest('images')->each(function ($fileAdder) {
             $fileAdder->toMediaCollection();
         });
 

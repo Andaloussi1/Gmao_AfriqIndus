@@ -166,10 +166,17 @@
                 <div class="mx-3 px-3 mb-6 md:mb-0">
                     <FormKit
                         type="select"
-                        label="Which country is the smallest?"
-                        name="small_country"
+                        label="Fournisseur"
                         :options=fournisseursObj
                         v-model="form.fournisseur_id"
+                    />
+                </div>
+                <div class="mx-3 px-3 mb-6 md:mb-0">
+                    <FormKit
+                        type="file"
+                        label="Image"
+                        @change="form.images = $event.target.files;"
+                        multiple
                     />
                 </div>
            </FormKit>
@@ -196,6 +203,9 @@ export default {
     methods: {
         submitHandler() {
             Inertia.post(route('articles.store'), this.form);
+        },
+        upload() {
+            console.log($event.target.files);
         },
     },
 
