@@ -167,6 +167,7 @@
                     <FormKit
                         type="select"
                         label="Fournisseur"
+                        placeholder="Choisissez un fournisseur"
                         :options=fournisseursObj
                         v-model="form.fournisseur_id"
                     />
@@ -202,6 +203,7 @@ export default {
     },
     methods: {
         submitHandler() {
+            console.log(this.form)
             Inertia.post(route('articles.store'), this.form);
         },
         upload() {
