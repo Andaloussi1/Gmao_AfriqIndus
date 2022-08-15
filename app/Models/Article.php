@@ -16,7 +16,7 @@ class Article extends Model implements HasMedia
     use HasFactory;
     use InteractsWithMedia;
 
-    protected $fillable = ['nom','reference','marque','prixAchat','prixVente','total','totalHTVA','emplacement','type','unite','designation','stockMin','stockInit','niveauStock', 'fournisseur_id'];
+    protected $fillable = ['nom','reference','marque','prixAchat','prixVente','emplacement','type','unite','designation','stockMin','niveauStock', 'fournisseur_id'];
     public function fournisseur(): BelongsTo
     {
         return $this->belongsTo(Fournisseur::class);

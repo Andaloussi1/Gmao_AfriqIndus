@@ -29,45 +29,42 @@ class ArticlesController extends Controller
 
         $articles = QueryBuilder::for(Article::class)
             ->defaultSort('niveauStock')
-            ->allowedSorts(['nom', 'marque', 'prixAchat', 'prixVente'])
-            ->allowedFilters(['nom', 'marque', 'reference'])
+            ->allowedSorts(['nom', 'reference','marque', 'prixAchat', 'prixVente', 'niveauStock', 'fournisseur'])
+            ->allowedFilters(['nom', 'marque', 'reference', 'fournisseur'])
             ->paginate()
             ->withQueryString()
             ->through(fn ($article)=>[
-            'id'=>$article->id,
-            'nom'=>$article->nom,
-            'reference'=>$article->reference,
-            'marque'=>$article->marque,
-            'prixAchat'=>$article->prixAchat,
-            'prixVente'=>$article->prixVente,
-            'type'=>$article->type,
-            'unite'=>$article->unite,
-            'designation'=>$article->designation,
-            'stockMin'=>$article->stockMin,
-            'niveauStock'=>$article->niveauStock,
-            'stockInit'=>$article->stockInit,
-            'location'=>$article->location,
-            'fournisseur'=>$article->fournisseur ? $article->fournisseur->nom:null,
-        ]);
+                'id'=>$article->id,
+                'nom'=>$article->nom,
+                'reference'=>$article->reference,
+                'marque'=>$article->marque,
+                'prixAchat'=>$article->prixAchat,
+                'prixVente'=>$article->prixVente,
+                'type'=>$article->type,
+                'unite'=>$article->unite,
+                'designation'=>$article->designation,
+                'stockMin'=>$article->stockMin,
+                'niveauStock'=>$article->niveauStock,
+                'location'=>$article->location,
+                'fournisseur'=>$article->fournisseur ? $article->fournisseur->nom:null,
+                'url'=>$article->getFirstMediaUrl(),
+            ]);
+
+
 
         return Inertia::render('Articles/Index', [
             'articles' => $articles,
         ])->table(function (InertiaTable $table) {
             $table
+                ->column(key: 'url', label: 'Image')
                 ->column(key: 'nom', searchable: true, sortable: true, canBeHidden: false)
                 ->column(key: 'reference', searchable: true, sortable: true)
                 ->column(key: 'marque', searchable: true, sortable: true)
                 ->column(key: 'prixAchat', label: 'Prix d\'achat', sortable: true)
                 ->column(key: 'prixVente', label: 'Prix de vente', sortable: true)
-                ->column(key: 'type', label: 'type', sortable: true)
-                ->column(key: 'unite', label: 'unite', sortable: true)
-                ->column(key: 'designation', label: 'designation', sortable: true)
-                ->column(key: 'stockMin', label: 'stockMin', sortable: true)
-                ->column(key: 'stockInit', label: 'stockInit', sortable: true)
                 ->column(key: 'niveauStock', label: 'niveauStock', sortable: true)
-                ->column(key: 'location', label: 'location', sortable: true)
-                ->column(key: 'fournisseur', searchable: true, sortable: true, canBeHidden: false)
-                ->column(label: 'Actions');
+                ->column(key: 'fournisseur', sortable: true, searchable: true)
+                ->column(label: 'Actions', canBeHidden: false);
         });
     }
 
@@ -106,7 +103,7 @@ class ArticlesController extends Controller
     public function create()
     {
         $fournisseurs = Fournisseur::all()->sortBy('nom')
-            ->map->only('id','nom');
+            ->map->only(['id','nom']);
         return inertia::render('Articles/Create', [
         'fournisseurs' => $fournisseurs,
         ]);
@@ -131,14 +128,11 @@ class ArticlesController extends Controller
             'marque' => $request->marque,
             'prixAchat' => $request->prixAchat,
             'prixVente' => $request->prixVente,
-            'total' => $request->total,
-            'totalHTVA' => $request->totalHTVA,
             'emplacement' => $request->emplacement,
             'type' => $request->type,
             'unite' => $request->unite,
             'designation' => $request->designation,
             'stockMin' => $request->stockMin,
-            'stockInit' => $request->stockInit,
             'niveauStock' => $request->niveauStock,
             'fournisseur_id'=>$request->fournisseur_id,
         ]);
@@ -203,8 +197,6 @@ class ArticlesController extends Controller
             'marque' => $request->marque,
             'prixAchat' => $request->prixAchat,
             'prixVente' => $request->prixVente,
-            'total' => $request->total,
-            'totalHTVA' => $request->totalHTVA,
             'emplacement' => $request->emplacement,
             'type' => $request->type,
             'unite' => $request->unite,

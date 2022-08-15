@@ -77,26 +77,6 @@
                             v-model="form.prixVente"
                         />
                     </div>
-                    <div class="px-3">
-                        <FormKit
-                            type="number"
-                            label="Total"
-                            label-class="block mb-2 font-bold text-sm"
-                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.total"
-                        />
-                    </div>
-                    <div class="px-3">
-                        <FormKit
-                            type="number"
-                            label="Total hors TVA"
-                            label-class="block mb-2 font-bold text-sm"
-                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.totalHTVA"
-                        />
-                    </div>
                 </div>
 
                 <div class="mx-3 md:flex mb-6">
@@ -136,16 +116,6 @@
                         <FormKit
                             type="number"
                             label="Stock initiale"
-                            label-class="block mb-2 font-bold text-sm"
-                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.stockInit"
-                        />
-                    </div>
-                    <div class="md:w-1/3 px-3">
-                        <FormKit
-                            type="number"
-                            label="Niveau de stock"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -198,12 +168,8 @@ export default {
     props:{
         fournisseurs:Object,
     },
-    data() {
-        return{media: [],}
-    },
     methods: {
         submitHandler() {
-            console.log(this.form)
             Inertia.post(route('articles.store'), this.form);
         },
         upload() {
@@ -233,7 +199,6 @@ export default {
 
         const fournisseurArray = Object.values(props.fournisseurs);
         const fournisseursObj = fournisseurArray.reduce((previousObject, fournisseur) => ({ ...previousObject, [fournisseur.id]: fournisseur.nom}), {});
-        console.log(fournisseursObj);
 
         return {form, fournisseursObj};
     },
