@@ -59,11 +59,11 @@ const destroy=(id)=>{
                                 </button>
                             </div>
                         </template>
-                        <template v-else-if="column.key === 'url'">
+                        <Link :href="route('articles.show',article.id)" v-else-if="column.key === 'url'">
                             <div class="relative w-14 h-14">
                                 <img :src="article[column.key]" alt="article image" />
                             </div>
-                        </template>
+                        </Link>
                         <Link v-else="" :href="route('articles.show',article.id)" class="px-6 py-4 flex items-center">
                             {{ article[column.key] }}
                         </Link>

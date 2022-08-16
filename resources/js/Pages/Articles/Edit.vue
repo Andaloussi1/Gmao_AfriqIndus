@@ -60,22 +60,7 @@
                                    aria-describedby="emailHelp124" placeholder="Prix de vente">
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Total:</label>
-                            <input type="number" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput123"
-                                   v-model="form.total"
-                                   aria-describedby="emailHelp123" placeholder="Total">
-                        </div>
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Total HTVA:</label>
-                            <input type="number" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput124"
-                                   v-model="form.totalHTVA"
-                                   aria-describedby="emailHelp124" placeholder="Total hors TVA">
-                        </div>
-                    </div>
+
                     <div class="grid grid-cols-2 gap-4">
                         <div class="form-group mb-6">
                             <label class="text-gray-900 text-base leading-tight mb-2">Emplacement:</label>
@@ -110,13 +95,6 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Stock initial :</label>
-                            <input type="number" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput123"
-                                   v-model="form.stockInit"
-                                   aria-describedby="emailHelp123" placeholder="Stock initial">
-                        </div>
-                        <div class="form-group mb-6">
                             <label class="text-gray-900 text-base leading-tight mb-2">Stock minimal:</label>
                             <input type="number" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                    id="exampleInput124"
@@ -132,9 +110,19 @@
                                     {{fournisseur.nom}}
                                 </option>
                             </select>
-
                         </div>
                     </div>
+                    <div class="grid gap-2">
+                        <div class="relative" v-for="img in currentMedia">
+                            <button @click="removeImage(img.id)" type="button" class="absolute top-0 left-0 text-white bg-opacity-75 rounded-full cursor-pointer hover:bg-opacity-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <img :src="img.url" class="rounded-xl object-cover h-48">
+                        </div>
+                    </div>
+
 
                     <button type="submit"  class="w-full
                                                   px-6
@@ -173,7 +161,21 @@ export default {
     props:{
         article:Object,
         fournisseurs: Object,
+        media: Object,
     },
+    data(props) {
+      return {
+          deletedMedia: [],
+          currentMedia: props.media,
+      }
+    },
+    methods: {
+      removeImage(id) {
+          this.deletedMedia.splice(this.media.length, 0, id);
+          this.currentMedia = this.currentMedia.filter(image => image.id != id);
+      }
+    },
+
     setup(props) {
         const form = useForm({
             nom: props.article.nom,
@@ -191,6 +193,7 @@ export default {
             stockInit: props.article.stockInit,
             niveauStock: props.article.niveauStock,
             fournisseur_id: props.article.fournisseur_id,
+            deleted_media: [],
         });
         return {form};
     },

@@ -174,11 +174,15 @@ class ArticlesController extends Controller
     public function edit(Article $article)
     {
         $fournisseurs = Fournisseur::all()->sortBy('name')
-            ->map->only('id','nom');
+            ->map->only(['id','nom']);
+        $media = $article->getMedia()->map(function ($image) {
+        return ["url" => $image->getUrl(), "id" => $image->getAttribute('id')];
+        });
 
         return Inertia::render('Articles/Edit', [
             'article' => $article,
             'fournisseurs' => $fournisseurs,
+            'media' => $media
         ]);
     }
 
