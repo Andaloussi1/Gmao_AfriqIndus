@@ -8,160 +8,150 @@
 
         </template>
 
-        <div class="flex justify-center">
-            <div class="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
-                <h3  class="text-center text-gray-900 text-xl leading-tight font-medium mb-2">Ajouter un Article</h3><br>
-                <form @submit.prevent="submit">
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Reference:</label>
-                            <input type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput123"
-                                   v-model="form.reference"
-                                   aria-describedby="emailHelp123" placeholder="Reference">
-                        </div>
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Nom:</label>
-                            <input type="text" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput124"
-                                   v-model="form.nom"
-                                   aria-describedby="emailHelp124" placeholder="Nom">
-                        </div>
+        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex items-center justify-center my-2">
+            <FormKit
+                type="form"
+                submit-label="Ajouter"
+                @submit="submitHandler"
+            >
+                <div class="mx-3 md:flex mb-6">
+                    <div class="px-3 mb-6 md:mb-0">
+                        <FormKit
+                            type="text"
+                            label="Reference"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.reference"
+                        />
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Marque:</label>
-                            <input type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput123"
-                                   v-model="form.marque"
-                                   aria-describedby="emailHelp123" placeholder="Marque">
-                        </div>
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Type:</label>
-                            <input type="text" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput124"
-                                   v-model="form.type"
-                                   aria-describedby="emailHelp124" placeholder="Type">
-                        </div>
+                    <div class="px-3">
+                        <FormKit
+                            type="text"
+                            label="Nom"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.nom"
+                        />
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Prix d'achat:</label>
-                            <input type="number" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput123"
-                                   v-model="form.prixAchat"
-                                   aria-describedby="emailHelp123" placeholder="Prix d'achat">
-                        </div>
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Prix de vente:</label>
-                            <input type="number" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput124"
-                                   v-model="form.prixVente"
-                                   aria-describedby="emailHelp124" placeholder="Prix de vente">
-                        </div>
+                    <div class="px-3">
+                        <FormKit
+                            type="text"
+                            label="Marque"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.marque"
+                        />
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Total:</label>
-                            <input type="number" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput123"
-                                   v-model="form.total"
-                                   aria-describedby="emailHelp123" placeholder="Total">
-                        </div>
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Total HTVA:</label>
-                            <input type="number" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput124"
-                                   v-model="form.totalHTVA"
-                                   aria-describedby="emailHelp124" placeholder="Total hors TVA">
-                        </div>
+                    <div class="px-3">
+                        <FormKit
+                            type="text"
+                            label="Type"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.type"
+                        />
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Emplacement:</label>
-                            <input type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput123"
-                                   v-model="form.emplacement"
-                                   aria-describedby="emailHelp123" placeholder="Emplacement">
-                        </div>
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Designation:</label>
-                            <input type="text" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput124"
-                                   v-model="form.designation"
-                                   aria-describedby="emailHelp124" placeholder="Designation">
-                        </div>
+                </div>
+                <div class="mx-3 md:flex mb-6">
+                    <div class="px-3 mb-6 md:mb-0">
+                        <FormKit
+                            type="number"
+                            label="Prix d'achat"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.prixAchat"
+                        />
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Unité:</label>
-                            <input type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput123"
-                                   v-model="form.unite"
-                                   aria-describedby="emailHelp123" placeholder="Unité">
-                        </div>
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Niveau de stock:</label>
-                            <input type="number" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput124"
-                                   v-model="form.niveauStock"
-                                   aria-describedby="emailHelp124" placeholder="Niveau de stock">
-                        </div>
+                    <div class="px-3">
+                        <FormKit
+                            type="number"
+                            label="Prix de vente"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.prixVente"
+                        />
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Stock initiale:</label>
-                            <input type="number" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput123"
-                                   v-model="form.stockInit"
-                                   aria-describedby="emailHelp123" placeholder="Stock initial">
-                        </div>
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Stock minimale:</label>
-                            <input type="number" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput124"
-                                   v-model="form.stockMin"
-                                   aria-describedby="emailHelp124" placeholder="Stock minimal">
-                        </div>
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Fournisseurs :</label>
-                            <select class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    v-model="form.fournisseur_id"
-                                    aria-describedby="emailHelp124">
-                                <option v-for="fournisseur in fournisseurs" :key="fournisseur.id" :value="fournisseur.id" >
-                                    {{fournisseur.nom}}
-                                </option>
+                </div>
 
-                            </select>
-
-                        </div>
+                <div class="mx-3 md:flex mb-6">
+                    <div class="md:w-1/3 px-3 mb-6 md:mb-0">
+                        <FormKit
+                            type="text"
+                            label="Emplacement"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.emplacement"
+                        />
                     </div>
-
-                    <input type="file" id="image" name="image" @input="form.images = $event.target.files" multiple>
-
-                    <button type="submit" class="w-full
-                                                 px-6
-                                                 py-2.5
-                                                 bg-blue-600
-                                                 text-white
-                                                 font-medium
-                                                 text-xs
-                                                 leading-tight
-                                                 uppercase
-                                                 rounded
-                                                 shadow-md
-                                                 hover:bg-blue-700 hover:shadow-lg
-                                                 focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
-                                                 active:bg-blue-800 active:shadow-lg
-                                                 transition
-                                                 duration-150
-                                                 ease-in-out">
-                        Ajouter
-                    </button>
-                </form>
-            </div>
+                    <div class="md:w-1/3 px-3">
+                        <FormKit
+                            type="text"
+                            label="Designation"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.designation"
+                        />
+                    </div>
+                    <div class="md:w-1/3 px-3">
+                        <FormKit
+                            type="text"
+                            label="Unité"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.unite"
+                        />
+                    </div>
+                </div>
+                <div class="mx-3 md:flex mb-6">
+                    <div class="md:w-1/3 px-3 mb-6 md:mb-0">
+                        <FormKit
+                            type="number"
+                            label="Stock initiale"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.niveauStock"
+                        />
+                    </div>
+                    <div class="md:w-1/3 px-3">
+                        <FormKit
+                            type="number"
+                            label="Stock minimal"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.stockMin"
+                        />
+                    </div>
+                </div>
+                <div class="mx-3 px-3 mb-6 md:mb-0">
+                    <FormKit
+                        type="select"
+                        label="Fournisseur"
+                        placeholder="Choisissez un fournisseur"
+                        :options=fournisseursObj
+                        v-model="form.fournisseur_id"
+                    />
+                </div>
+                <div class="mx-3 px-3 mb-6 md:mb-0">
+                    <FormKit
+                        type="file"
+                        label="Image"
+                        @change="form.images = $event.target.files;"
+                        multiple
+                    />
+                </div>
+           </FormKit>
         </div>
-
 
     </AppLayout>
 </template>
@@ -171,22 +161,23 @@ import {Inertia} from '@inertiajs/inertia'
 import {useForm, Link} from '@inertiajs/inertia-vue3'
 import AppLayout from '@/Layouts/AppLayout.vue'
 import FileInput from '../../Components/FileInput.vue'
+import {FormKit} from '@formkit/vue'
 
 
 export default {
     props:{
         fournisseurs:Object,
     },
-    data() {
-        return{media: [],}
-    },
     methods: {
-        submit() {
+        submitHandler() {
             Inertia.post(route('articles.store'), this.form);
+        },
+        upload() {
+            console.log($event.target.files);
         },
     },
 
-    setup() {
+    setup(props) {
         const form = useForm({
             nom: "",
             reference: "",
@@ -205,11 +196,15 @@ export default {
             fournisseur_id:"",
             images: []
         });
-        return {form};
+
+        const fournisseurArray = Object.values(props.fournisseurs);
+        const fournisseursObj = fournisseurArray.reduce((previousObject, fournisseur) => ({ ...previousObject, [fournisseur.id]: fournisseur.nom}), {});
+
+        return {form, fournisseursObj};
     },
 
 
-    components: {Link, AppLayout, FileInput},
+    components: {Link, AppLayout, FileInput, FormKit},
 }
 </script>
 

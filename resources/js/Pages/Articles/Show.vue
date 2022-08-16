@@ -18,16 +18,12 @@
         <body class="overflow-hidden dark:bg-gray-900">
             <div class="md:flex items-start justify-center py-12 2xl:px-20 md:px-6 px-4">
                 <div class="xl:w-2/6 lg:w-2/5 w-80 md:block hidden">
-                    <img class="w-full" alt="image of a girl posing" :src=urls[0] />
-                    <img class="mt-6 w-full" alt="image of a girl posing" :src=urls[1] />
+                    <img class="w-full" v-for="url in urls" :src="url"/>
                 </div>
                 <div class="md:hidden">
-                    <img class="w-full" alt="image of a girl posing" :src=urls[0] />
+                    <img class="w-full" :src=urls[0] />
                     <div class="flex items-center justify-between mt-3 space-x-4 md:space-x-0">
-                        <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" :src=urls[0] />
-                        <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" :src=urls[1] />
-                        <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" :src=urls[0] />
-                        <img alt="image-tag-one" class="md:w-48 md:h-48 w-full" :src=urls[1] />
+                        <img class="md:w-48 md:h-48 w-full" v-for="url in urls" :src="url"/>
                     </div>
                 </div>
                 <div class="xl:w-2/5 md:w-1/2 lg:ml-8 md:ml-6 md:mt-0 mt-6">
@@ -81,7 +77,7 @@
                             <div class=" pt-4 text-base leading-normal pr-12 mt-4 text-gray-600 dark:text-gray-300" id="sect">
                                 <p class="text-base leading-4 mt-2 text-gray-600 dark:text-gray-300">Stock initiale: {{form.stockInit}}</p>
                                 <p class="text-base leading-4 mt-7 text-gray-600 dark:text-gray-300">Stock minimale: {{form.stockMin}}</p>
-                                <p class="text-base leading-4 mt-7 text-gray-600 dark:text-gray-300">Total hors TVA: {{form.totalHtva}}</p>
+                                <p class="text-base leading-4 mt-7 text-gray-600 dark:text-gray-300">Total hors TVA: {{form.totalHTVA}}</p>
                                 <p class="text-base leading-4 mt-7 text-gray-600 dark:text-gray-300">Unité: {{form.unite}}</p>
                             </div>
                         </div>
@@ -107,9 +103,6 @@ export default {
     },
 
     methods:{
-        submit: function(){
-            this.$refs.form.submit()
-        },
     },
     setup(props) {
 
@@ -120,14 +113,13 @@ export default {
             marque: props.article.marque,
             prixAchat: props.article.prixAchat,
             prixVente: props.article.prixVente,
-            total: props.article.total,
-            totalHTVA: props.article.totalHTVA,
+            total: props.article.prixAchat * props.article.niveauStock,
+            totalHTVA: (props.article.prixVente - props.article.prixAchat) * props.article.niveauStock,
             emplacement: props.article.emplacement,
             type: props.article.type,
             unite: props.article.unite,
             designation: props.article.designation,
             stockMin: props.article.stockMin,
-            stockInit: props.article.stockInit,
             niveauStock: props.article.niveauStock,
         });
         return {form};

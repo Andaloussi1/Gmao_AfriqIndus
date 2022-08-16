@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('article_commande', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('article_id')->constrained();
-            $table->foreignId('commande_id')->constrained();
+            $table->foreignId('article_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('commande_id')->constrained()->cascadeOnDelete();
         });
     }
 
