@@ -11,7 +11,7 @@
         <div class="flex justify-center">
             <div class="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
                 <h5 class="text-gray-900 text-xl leading-tight font-medium mb-2">Modifier Article</h5>
-                <form @submit.prevent="form.put(route('articles.update',article.id))">
+                <form @submit.prevent="submitHandler">
                     <div class="grid grid-cols-2 gap-4">
                         <div class="form-group mb-6">
                             <label class="text-gray-900 text-base leading-tight mb-2">Reference:</label>
@@ -173,7 +173,11 @@ export default {
       removeImage(id) {
           this.deletedMedia.splice(this.media.length, 0, id);
           this.currentMedia = this.currentMedia.filter(image => image.id != id);
-      }
+      },
+      submitHandler(){
+          this.form.deleted_media = this.deletedMedia;
+          Inertia.put(route('articles.update', this.$props.article), this.form);
+      },
     },
 
     setup(props) {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Fournisseur;
-use App\Models\Media;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -195,6 +195,10 @@ class ArticlesController extends Controller
      */
     public function update(Request $request, Article $article)
     {
+        $deletedImages = Media::findMany($request->deleted_media);
+        $deletedImages->each(function ($image) {
+            $image->delete();
+        });
         $article->update([
             'nom' => $request->nom,
             'reference' =>$request->reference,
@@ -206,7 +210,6 @@ class ArticlesController extends Controller
             'unite' => $request->unite,
             'designation' => $request->designation,
             'stockMin' => $request->stockMin,
-            'stockInit' => $request->stockInit,
             'niveauStock' => $request->niveauStock,
             'fournisseur_id'=>$request->fournisseur_id,
         ]
