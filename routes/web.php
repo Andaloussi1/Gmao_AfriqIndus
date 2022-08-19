@@ -34,14 +34,15 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::resource('articles', ArticlesController::class);
+    Route::resource('articles', ArticlesController::class)->except("update");
+    Route::post('/articles/{id}',[ArticlesController::class, 'update'])->name('articles.update');
     Route::resource('commandes', CommandesController::class);
     Route::resource('fournisseurs', FournisseursController::class);
     Route::resource('interventions', InterventionsController::class);
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
-    Route::get('/report/{id}',[ArticlesController::class,'report'])
+    Route::get('/report/{id}',[ArticlesController::class, 'report'])
         ->name('report');
 
 
