@@ -156,11 +156,9 @@
     </AppLayout>
 </template>
 <script>
-import {reactive} from 'vue'
 import {Inertia} from '@inertiajs/inertia'
 import {useForm, Link} from '@inertiajs/inertia-vue3'
 import AppLayout from '@/Layouts/AppLayout.vue'
-import FileInput from '../../Components/FileInput.vue'
 import {FormKit} from '@formkit/vue'
 
 
@@ -172,9 +170,7 @@ export default {
         submitHandler() {
             Inertia.post(route('articles.store'), this.form);
         },
-        upload() {
-            console.log($event.target.files);
-        },
+
     },
 
     setup(props) {
@@ -184,14 +180,11 @@ export default {
             marque: "",
             prixAchat: "",
             prixVente: "",
-            total: "",
-            totalHTVA: "",
             emplacement: "",
             type: "",
             unite: "",
             designation: "",
             stockMin: "",
-            stockInit: "",
             niveauStock: "",
             fournisseur_id:"",
             images: []
@@ -204,7 +197,7 @@ export default {
     },
 
 
-    components: {Link, AppLayout, FileInput, FormKit},
+    components: {Link, AppLayout, FormKit},
 }
 </script>
 
