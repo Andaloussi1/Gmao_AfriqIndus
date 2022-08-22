@@ -1,7 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\inertia;
+use App\Http\Controllers\InertiaTable;
+use App\Http\Controllers\Intervention;
+use App\Http\Controllers\interventions;
+use App\Http\Controllers\QueryBuilder;
+use App\Http\Controllers\Redirect;
 use Illuminate\Http\Request;
 
 class InterventionsController extends Controller

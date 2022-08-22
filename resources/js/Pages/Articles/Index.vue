@@ -28,6 +28,7 @@ const destroy=(id)=>{
         </div>
 
 
+
         <Table :resource="articles">
             <template #body="{show, columns}">
                 <tr

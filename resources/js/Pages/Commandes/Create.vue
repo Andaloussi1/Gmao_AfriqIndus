@@ -105,7 +105,7 @@
                             <FormKit
                                 type="select"
                                 label="Article"
-                                placeholder="Choisissez un fournisseur"
+                                placeholder="Choisissez un article"
                                 :options=articlesObj
                                 v-model="form.article_id"
                             />

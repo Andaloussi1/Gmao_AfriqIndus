@@ -14,11 +14,13 @@ const form = useForm({
     password: '',
     password_confirmation: '',
     terms: false,
+    role_id: '',
 });
 
 const submit = () => {
-    form.post(route('register'), {
-        onFinish: () => form.reset('password', 'password_confirmation'),
+    form.post(route('register'),
+        {
+       // onFinish: () => form.reset('password', 'password_confirmation'),
     });
 };
 </script>
@@ -93,6 +95,19 @@ const submit = () => {
                     </div>
                 </JetLabel>
             </div>
+            <div class="mt-4">
+                <JetLabel for="role_id" value="Vous êtes?:" />
+                <select
+                    id="role_id"
+                    v-model="form.role_id"
+                    autofocus
+                    class="mt-1 block w-full rounded"
+                    required
+                >
+                    <option :value="true">Admin</option>
+                    <option :value="false">Technicien</option>
+                </select>
+            </div>
 
             <div class="flex items-center justify-end mt-4">
                 <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
@@ -103,6 +118,8 @@ const submit = () => {
                     Register
                 </JetButton>
             </div>
+
+
         </form>
     </JetAuthenticationCard>
 </template>

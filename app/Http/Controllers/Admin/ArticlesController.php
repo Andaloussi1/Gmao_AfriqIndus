@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Fournisseur;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\PDF as PDF1;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
-use phpDocumentor\Reflection\DocBlock\Tags\Reference\Reference;
 use ProtoneMedia\LaravelQueryBuilderInertiaJs\InertiaTable;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\QueryBuilder\QueryBuilder;
-use Barryvdh\DomPDF\PDF as PDF1;
-
 
 
 class ArticlesController extends Controller
@@ -26,6 +26,8 @@ class ArticlesController extends Controller
      */
     public function index()
     {
+
+
 
         $articles = QueryBuilder::for(Article::class)
             ->defaultSort('niveauStock')
@@ -51,9 +53,11 @@ class ArticlesController extends Controller
             ]);
 
 
+        $role= Auth::user()->role_id;
+
 
         return Inertia::render('Articles/Index', [
-            'articles' => $articles,
+            'articles' => $articles,'roles'=>$role,
         ])->table(function (InertiaTable $table) {
             $table
                 ->column(key: 'url', label: 'Image')
@@ -66,6 +70,8 @@ class ArticlesController extends Controller
                 ->column(key: 'fournisseur', sortable: true, searchable: true)
                 ->column(label: 'Actions', canBeHidden: false);
         });
+
+
     }
 
     /**

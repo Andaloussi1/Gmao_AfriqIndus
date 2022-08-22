@@ -1,12 +1,14 @@
 <?php
 
-use App\Http\Controllers\InterventionsController;
+use App\Http\Controllers\Admin\ArticlesController;
+use App\Http\Controllers\Admin\CommandesController;
+use App\Http\Controllers\Admin\FournisseursController;
+use App\Http\Controllers\Admin\InterventionsController;
+use App\Http\Controllers\MediaController;
+use App\Http\Controllers\Technicien\TechniciensController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\ArticlesController;
-use App\Http\Controllers\CommandesController;
-use App\Http\Controllers\FournisseursController;
 
 
 /*
@@ -35,9 +37,11 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::resource('articles', ArticlesController::class);
+    Route::resource('media', MediaController::class);
     Route::resource('commandes', CommandesController::class);
     Route::resource('fournisseurs', FournisseursController::class);
     Route::resource('interventions', InterventionsController::class);
+    Route::resource('techniciens', TechniciensController::class);
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
@@ -52,4 +56,7 @@ Route::get('pdf',[ArticlesController::class,'pdf'])
     ->name('pdf');
 Route::get('view-pdf', [ArticlesController::class,'viewPDf'])->name('viewPDF');
 
+
+
+ Route::get('redirects',[ArticlesController::class,'index']);
 
