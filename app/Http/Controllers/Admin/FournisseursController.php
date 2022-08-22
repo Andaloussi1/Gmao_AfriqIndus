@@ -114,6 +114,7 @@ class FournisseursController extends Controller
      */
     public function update(Request $request, Fournisseur $fournisseur)
     {
+        dd($fournisseur);
         $fournisseur->update([
             'nom' => $request->nom,
             'tel' =>$request->tel,

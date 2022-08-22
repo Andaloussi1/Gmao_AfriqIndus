@@ -199,12 +199,17 @@ class ArticlesController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(Request $request, $id)
     {
+        $article = Article::find($id);
         $deletedImages = Media::findMany($request->deleted_media);
         $deletedImages->each(function ($image) {
             $image->delete();
         });
+        $article->addAllMediaFromRequest('images')->each(function ($fileAdder) {
+            $fileAdder->toMediaCollection();
+        });
+
         $article->update([
             'nom' => $request->nom,
             'reference' =>$request->reference,
@@ -217,9 +222,10 @@ class ArticlesController extends Controller
             'designation' => $request->designation,
             'stockMin' => $request->stockMin,
             'niveauStock' => $request->niveauStock,
-            'fournisseur_id'=>$request->fournisseur_id,
+            'fournisseur_id' => $request->fournisseur_id,
         ]
         );
+
         return Redirect::route('articles.index');
     }
 
