@@ -184,7 +184,6 @@ export default {
     methods: {
         submitHandler() {
             Inertia.post(route('articles.store'), this.form);
-            console.log(this.errors);
         },
 
     },
