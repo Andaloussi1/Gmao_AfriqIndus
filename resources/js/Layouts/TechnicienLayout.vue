@@ -11,7 +11,7 @@ import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink.vue';
 
 defineProps({
 
-    title: String,
+
 });
 
 const showingNavigationDropdown = ref(false);
@@ -51,19 +51,16 @@ const logout = () => {
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
 
-                                    <JetNavLink v-if="$page.props.user.role_id"
-                                        :href="route('articles.index')" :active="route().current('articles.index')">
 
-                                        Articles
-                                    </JetNavLink>
-                                    <JetNavLink v-if="$page.props.user.role_id"
-                                        :href="route('fournisseurs.index')" :active="route().current('fournisseurs.index')">
-                                        Fournisseurs
-                                    </JetNavLink>
 
-                                <JetNavLink v-if="!$page.props.user.role_id" :href="route('commandes.index')" :active="route().current('commandes.index')">
-                                    Commandes
+
+
+
+
+                                <JetNavLink :href="route('techniciens.index')" :active="route().current('techniciens.index')">
+                                    skr
                                 </JetNavLink>
+
 
                             </div>
                         </div>
@@ -224,16 +221,13 @@ const logout = () => {
                         <JetResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </JetResponsiveNavLink>
-
-
-                        <JetResponsiveNavLink v-if="$page.props.user.role_id"
-                            :href="route('articles.index')" :active="route().current('articles.index')">
+                        <JetResponsiveNavLink :href="route('articles.index')" :active="route().current('articles.index')">
                             articles
                         </JetResponsiveNavLink>
-                        <JetResponsiveNavLink v-if="!$page.props.user.role_id" :href="route('commandes.index')" :active="route().current('commandes.index')">
+                        <JetResponsiveNavLink :href="route('techniciens.index')" :active="route().current('techniciens.index')">
                             Commandes
                         </JetResponsiveNavLink>
-                        <JetResponsiveNavLink v-if="$page.props.user.role_id" :href="route('fournisseurs.index')" :active="route().current('fournisseurs.index')">
+                        <JetResponsiveNavLink :href="route('fournisseurs.index')" :active="route().current('fournisseurs.index')">
                             Fournisseurs
                         </JetResponsiveNavLink>
                     </div>

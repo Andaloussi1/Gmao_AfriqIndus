@@ -2,7 +2,7 @@
     <AppLayout title="fournisseurs">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                fournisseurs
+                Fournisseurs
             </h2>
             <div class="flex justify-end m-2 p-2">
                 <Link href="/fournisseurs/create" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded">Créer
@@ -54,6 +54,7 @@ import { Table } from "@protonemedia/inertiajs-tables-laravel-query-builder";
 import {Inertia} from "@inertiajs/inertia";
 export default{
     props:['fournisseurs'],
+
     components:{ Link, AppLayout ,Table },
     setup(){
         const destroy=(id)=>{
