@@ -128,6 +128,71 @@ class ArticlesController extends Controller
     public function store(Request $request)
     {
 
+        $request->validate([
+            'reference' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255',
+            ],
+            'nom' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255',
+            ],
+            'marque' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255',
+            ],
+            'prixAchat' => [
+                'required',
+                'numeric',
+            ],
+            'prixVente' => [
+                'required',
+                'numeric',
+            ],
+            'emplacement' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255'
+            ],
+            'type' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255',
+            ],
+            'unite' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255',
+            ],
+            'designation' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255',
+            ],
+            'stockMin' => [
+                'required',
+                'numeric',
+            ],
+            'niveauStock' => [
+                'required',
+                'numeric',
+            ],
+            'fournisseur_id' => [
+                'required',
+                'numeric',
+            ],
+        ]);
+
         $article = Article::create([
             'nom' => $request->nom,
             'reference' =>$request->reference,
