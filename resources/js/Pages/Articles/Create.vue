@@ -13,12 +13,14 @@
                 type="form"
                 submit-label="Ajouter"
                 @submit="submitHandler"
+                :config="{validationVisibility: 'submit'}"
             >
                 <div class="mx-3 md:flex mb-6">
                     <div class="px-3 mb-6 md:mb-0">
                         <FormKit
                             type="text"
                             label="Reference"
+                            validation="required|alphanumeric"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -29,6 +31,7 @@
                         <FormKit
                             type="text"
                             label="Nom"
+                            validation="required|alphanumeric"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -39,6 +42,7 @@
                         <FormKit
                             type="text"
                             label="Marque"
+                            validation="required|alphanumeric"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -49,6 +53,7 @@
                         <FormKit
                             type="text"
                             label="Type"
+                            validation="required|alpha"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -61,6 +66,7 @@
                         <FormKit
                             type="number"
                             label="Prix d'achat"
+                            validation="required"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -71,6 +77,7 @@
                         <FormKit
                             type="number"
                             label="Prix de vente"
+                            validation="required"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -84,6 +91,10 @@
                         <FormKit
                             type="text"
                             label="Emplacement"
+                            :validation="[['required'], ['matches', /^[A-zÀ-ú0-9\s]+$/]]"
+                            :validation-messages="{
+                                matches: 'L\'emplacement ne doit contenir que des lettres et des chiffres',
+                            }"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -94,6 +105,7 @@
                         <FormKit
                             type="text"
                             label="Designation"
+                            validation="required|alphanumeric"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -104,6 +116,7 @@
                         <FormKit
                             type="text"
                             label="Unité"
+                            validation="required|alphanumeric"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -116,6 +129,7 @@
                         <FormKit
                             type="number"
                             label="Stock initiale"
+                            validation="required"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -126,6 +140,7 @@
                         <FormKit
                             type="number"
                             label="Stock minimal"
+                            validation="required"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -137,6 +152,7 @@
                     <FormKit
                         type="select"
                         label="Fournisseur"
+                        validation="required"
                         placeholder="Choisissez un fournisseur"
                         :options=fournisseursObj
                         v-model="form.fournisseur_id"
@@ -161,7 +177,6 @@ import {useForm, Link} from '@inertiajs/inertia-vue3'
 import AppLayout from '@/Layouts/AppLayout.vue'
 import {FormKit} from '@formkit/vue'
 
-
 export default {
     props:{
         fournisseurs:Object,
@@ -169,6 +184,7 @@ export default {
     methods: {
         submitHandler() {
             Inertia.post(route('articles.store'), this.form);
+            console.log(this.errors);
         },
 
     },

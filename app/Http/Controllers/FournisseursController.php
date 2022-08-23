@@ -20,7 +20,7 @@ class FournisseursController extends Controller
     {
         $fournisseurs = QueryBuilder::for(Fournisseur::class)
             ->defaultSort('nom')
-            ->allowedSorts(['nom', 'tel', 'code'])
+            ->allowedSorts(['nom', 'tel', 'code', 'email', 'tauxTVA', 'code', 'adresse', 'telSec', 'numTVA'])
             ->allowedFilters(['nom', 'code'])
             ->paginate()
             ->withQueryString();
@@ -113,7 +113,6 @@ class FournisseursController extends Controller
      */
     public function update(Request $request, Fournisseur $fournisseur)
     {
-        dd($fournisseur);
         $fournisseur->update([
             'nom' => $request->nom,
             'tel' =>$request->tel,
