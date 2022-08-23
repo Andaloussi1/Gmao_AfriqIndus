@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Commande;
+use App\Models\Fournisseur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -53,10 +54,13 @@ class CommandesController extends Controller
      */
     public function create()
     {
+        $fournisseurs=Fournisseur::all()->sortBy('nom')->map->only('id','nom');
+
         $articles = Article::all()->sortBy('nom')
             ->map->only('id','nom');
         return inertia::render('Commandes/Create',[
             'articles' => $articles,
+            'fournisseurs'=>$fournisseurs,
         ]);
     }
 

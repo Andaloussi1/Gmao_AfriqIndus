@@ -58,7 +58,7 @@ const logout = () => {
 
 
                                 <JetNavLink :href="route('techniciens.index')" :active="route().current('techniciens.index')">
-                                    <Commandes></Commandes>
+                                    skr
                                 </JetNavLink>
 
 
