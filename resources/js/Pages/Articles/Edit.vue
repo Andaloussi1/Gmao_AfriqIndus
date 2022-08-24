@@ -186,7 +186,6 @@ export default {
         },
         submitHandler(){
             this.form.deleted_media = this.deletedMedia;
-            console.log(this.form);
             Inertia.post(route('articles.update', this.$props.article.id), this.form);
         },
     },
