@@ -148,20 +148,13 @@
                         />
                     </div>
                 </div>
-                <div class="mx-3 px-3 mb-6 md:mb-0">
-                    <FormKit
-                        type="select"
-                        label="Fournisseur"
-                        validation="required"
-                        placeholder="Choisissez un fournisseur"
-                        :options=fournisseursObj
-                        v-model="form.fournisseur_id"
-                    />
+
                 <div class="mx-3 md:flex mb-6">
                     <div class="md:w-1/3 px-3 mb-6 md:mb-0">
                         <FormKit
                             type="select"
                             label="Fournisseur"
+                            validation="required"
                             placeholder="Choisissez un fournisseur"
                             :options=fournisseursObj
                             v-model="form.fournisseur_id"
@@ -169,7 +162,6 @@
                     </div>
 
                     <div class=" px-3 pt-6">
-
                         <button type="button" @click="isHidden=!isHidden">
                             <svg  xmlns="http://www.w3.org/2000/svg" class=" h-8 w-8  rounded-r hover:bg-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
@@ -177,6 +169,7 @@
                         </button>
                     </div>
                 </div>
+
                 <div class="mx-3 px-3 mb-6 md:mb-0">
                     <FormKit
                         type="file"
@@ -184,7 +177,8 @@
                         @change="form.images = $event.target.files;"
                         multiple
                     />
-                </div>qq
+                </div>
+            </FormKit>
             <div v-if="isHidden" class=" h-fit w-fit mb-52 h-fit absolute bg-gray-300 border-2 border-b-gray-400 shadow-md rounded px-8 pt-6 pb-8 mb-4 flex items-center justify-center my-2">
                 <div class="hover:bg-gray-300 mb-96 rounded">
                     <button  type="button" @click="isHidden=!isHidden">
@@ -192,14 +186,14 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
-
                 </div>
+
                 <div>
                     <p class="font-semibold text-xl text-gray-800 leading-tight pl-72 mb-5">Ajouter un nouveau fournisseur</p>
                     <FormKit
                         type="form"
                         submit-label="Ajouter"
-                        @submit="submitHandlere"
+                        @submit="fournisseurSubmitHandler"
                     >
                         <div class="mx-3 md:flex mb-6">
                             <div class="px-3">
@@ -209,7 +203,7 @@
                                     label-class="block mb-2 font-bold text-sm"
                                     inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                                     input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                    v-model="forme.nom"
+                                    v-model="fournisseurForm.nom"
                                 />
                             </div>
                             <div class="px-3">
@@ -219,7 +213,7 @@
                                     label-class="block mb-2 font-bold text-sm"
                                     inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                                     input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                    v-model="forme.tel"
+                                    v-model="fournisseurForm.tel"
                                 />
                             </div>
                             <div class="px-3">
@@ -229,7 +223,7 @@
                                     label-class="block mb-2 font-bold text-sm"
                                     inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                                     input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                    v-model="forme.email"
+                                    v-model="fournisseurForm.email"
                                 />
                             </div>
                         </div>
@@ -241,7 +235,7 @@
                                     label-class="block mb-2 font-bold text-sm"
                                     inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                                     input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                    v-model="forme.tauxTVA"
+                                    v-model="fournisseurForm.tauxTVA"
                                 />
                             </div>
                             <div class="px-3">
@@ -251,7 +245,7 @@
                                     label-class="block mb-2 font-bold text-sm"
                                     inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                                     input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                    v-model="forme.code"
+                                    v-model="fournisseurForm.code"
                                 />
                             </div>
                             <div class="px-3">
@@ -261,7 +255,7 @@
                                     label-class="block mb-2 font-bold text-sm"
                                     inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                                     input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                    v-model="forme.remarque"
+                                    v-model="fournisseurForm.remarque"
                                 />
                             </div>
                             <div class="px-3">
@@ -271,7 +265,7 @@
                                     label-class="block mb-2 font-bold text-sm"
                                     inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                                     input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                    v-model="forme.adresse"
+                                    v-model="fournisseurForm.adresse"
                                 />
                             </div>
                         </div>
@@ -284,7 +278,7 @@
                                     label-class="block mb-2 font-bold text-sm"
                                     inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                                     input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                    v-model="forme.telSec"
+                                    v-model="fournisseurForm.telSec"
                                 />
                             </div>
                             <div class="md:w-1/3 px-3">
@@ -294,7 +288,7 @@
                                     label-class="block mb-2 font-bold text-sm"
                                     inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                                     input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                    v-model="forme.numTVA"
+                                    v-model="fournisseurForm.numTVA"
                                 />
                             </div>
                         </div>
@@ -307,7 +301,7 @@
                                     label-class="block mb-2 font-bold text-sm"
                                     inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                                     input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                    v-model="forme.active"
+                                    v-model="fournisseurForm.active"
                                 />
                             </div>
                         </div>
@@ -341,21 +335,21 @@ export default {
     methods: {
         submitHandler() {
             Inertia.post(route('articles.store'), this.form);
-        },submitHandlere() {
-            console.log(this.forme)
+        },fournisseurSubmitHandler() {
+            console.log(this.fournisseurForm)
             Inertia.visit(route('fournisseurs.store'),{ method: 'post',data:{
-                    nom:this.forme.nom,
-                    tel:this.forme.tel,
-                    telSec:this.forme.telSec,
-                    remarque:this.forme.remarque,
-                    adresse:this.forme.adresse,
-                    email:this.forme.email,
-                    numTVA:this.forme.numTVA,
-                    active:this.forme.active,
-                    code:this.forme.code,
-                    tauxTVA:this.forme.tauxTVA,
+                    nom:this.fournisseurForm.nom,
+                    tel:this.fournisseurForm.tel,
+                    telSec:this.fournisseurForm.telSec,
+                    remarque:this.fournisseurForm.remarque,
+                    adresse:this.fournisseurForm.adresse,
+                    email:this.fournisseurForm.email,
+                    numTVA:this.fournisseurForm.numTVA,
+                    active:this.fournisseurForm.active,
+                    code:this.fournisseurForm.code,
+                    tauxTVA:this.fournisseurForm.tauxTVA,
                 }},)
-            //Inertia.post(route('fournisseurs.store'), this.forme);
+            //Inertia.post(route('fournisseurs.store'), this.fournisseurForm);
         },
         upload() {
             console.log($event.target.files);
@@ -381,7 +375,7 @@ export default {
             fournisseur_id:"",
             images: []
         });
-        const forme = useForm({
+        const fournisseurForm = useForm({
             nom: "",
             tel: "",
             email: "",
@@ -397,7 +391,7 @@ export default {
         const fournisseurArray = Object.values(props.fournisseurs);
         const fournisseursObj = fournisseurArray.reduce((previousObject, fournisseur) => ({ ...previousObject, [fournisseur.id]: fournisseur.nom}), {});
 
-        return {form,forme, fournisseursObj};
+        return {form,fournisseurForm, fournisseursObj};
     },
 
 

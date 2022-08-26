@@ -36,7 +36,8 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::resource('articles', ArticlesController::class);
+    Route::resource('articles', ArticlesController::class)->except("update");
+    Route::post('/articles/{id}',[ArticlesController::class, 'update'])->name('articles.update');
     Route::resource('media', MediaController::class);
     Route::resource('commandes', CommandesController::class);
     Route::resource('fournisseurs', FournisseursController::class);
