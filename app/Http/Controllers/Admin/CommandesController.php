@@ -54,13 +54,11 @@ class CommandesController extends Controller
      */
     public function create()
     {
-        $fournisseurs=Fournisseur::all()->sortBy('nom')->map->only('id','nom');
 
         $articles = Article::all()->sortBy('nom')
             ->map->only('id','nom');
         return inertia::render('Commandes/Create',[
             'articles' => $articles,
-            'fournisseurs'=>$fournisseurs,
         ]);
     }
 
@@ -113,8 +111,10 @@ class CommandesController extends Controller
      */
     public function edit(Commande $commande)
     {
+        $articles=Article::all()->sortBy('nom')->map->only('id','nom');
         return Inertia::render('Commandes/Edit', [
             'commande' => $commande,
+            'articles'=> $articles,
         ]);
     }
 
@@ -137,7 +137,7 @@ class CommandesController extends Controller
             'total' => $request->total,
             'totalHTVA' => $request->totalHTVA,
             'article_id'=>$request->article_id,
-                ]
+            ]
         );
         return Redirect::route('commandes.index');
     }

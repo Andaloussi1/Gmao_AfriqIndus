@@ -8,13 +8,13 @@
 
         </template>
 
-        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex items-center justify-center my-2">
+        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex items-center justify-center my-2"/>
             <FormKit
                 type="form"
                 submit-label="Ajouter"
                 @submit="submitHandler"
                 :config="{validationVisibility: 'submit'}"
-            >
+            />
                 <div class="mx-3 md:flex mb-6">
                     <div class="px-3 mb-6 md:mb-0">
                         <FormKit
