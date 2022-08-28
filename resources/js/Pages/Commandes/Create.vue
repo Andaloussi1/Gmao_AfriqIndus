@@ -19,6 +19,7 @@
                         <FormKit
                             type="text"
                             label="Titre"
+                            validation="required | alpha"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -29,6 +30,7 @@
                         <FormKit
                             type="text"
                             label="Description"
+                            validation="required|alphanumeric"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -39,6 +41,7 @@
                         <FormKit
                             type="text"
                             label="Adresse Livraison"
+                            validation="required|alphanumeric"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -49,6 +52,7 @@
                         <FormKit
                             type="date"
                             label="Date Commande"
+                            validation="required"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -61,6 +65,7 @@
                         <FormKit
                             type="date"
                             label="Date Livraison"
+                            validation="required"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -71,6 +76,7 @@
                         <FormKit
                             type="text"
                             label="status"
+                            validation="required|alphanumeric"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -81,6 +87,7 @@
                         <FormKit
                             type="number"
                             label="Total"
+                            validation="required"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -94,6 +101,7 @@
                         <FormKit
                             type="number"
                             label="Total HTVA"
+                            validation="required"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -104,6 +112,7 @@
                         <FormKit
                             type="select"
                             label="Article"
+                            validation="required"
                             placeholder="Choisissez un article"
                             :options=articlesObj
                             v-model="form.article_id"

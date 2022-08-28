@@ -178,7 +178,6 @@
                         multiple
                     />
                 </div>
-            </FormKit>
             <div v-if="isHidden" class=" h-fit w-fit mb-52 h-fit absolute bg-gray-300 border-2 border-b-gray-400 shadow-md rounded px-8 pt-6 pb-8 mb-4 flex items-center justify-center my-2">
                 <div class="hover:bg-gray-300 mb-96 rounded">
                     <button  type="button" @click="isHidden=!isHidden">
@@ -309,8 +308,7 @@
                     </FormKit>
                 </div>
             </div>
-        </div>
-
+        
     </AppLayout>
 </template>
 <script>

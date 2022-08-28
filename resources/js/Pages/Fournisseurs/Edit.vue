@@ -7,137 +7,156 @@
             </h2>
 
         </template>
+<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex items-center justify-center my-2">
+            <FormKit
+                type="form"
+                submit-label="Ajouter"
+                @submit="submitHandler"
+            >
+                <div class="mx-3 md:flex mb-6">
+                    <div class="px-3">
+                        <FormKit
+                            type="text"
+                            label="Nom"
+                            :validation="[['required'], ['matches', /^[A-zÀ\s]+$/]]"
+                            :validation-messages="{
+                                matches: 'Nom ne doit pas contenir des chiffres',
+                            }"                           
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.nom"
+                        />
+                    </div>
+                    <div class="px-3">
+                        <FormKit
+                            type="text"
+                            label="Telephone"
+                            validation="required|number"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.tel"
+                        />
+                    </div>
+                    <div class="px-3">
+                        <FormKit
+                            type="email"
+                            label="Email"
+                            validation="required|email"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.email"
+                        />
+                    </div>
+                </div>
+                <div class="mx-3 md:flex mb-6">
+                    <div class="px-3 mb-6 md:mb-0">
+                        <FormKit
+                            type="number"
+                            label="Taux TVA"
+                            validation="required"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.tauxTVA"
+                        />
+                    </div>
+                    <div class="px-3">
+                        <FormKit
+                            type="number"
+                            label="Code"
+                            validation="required"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.code"
+                        />
+                    </div>
+                    <div class="px-3">
+                        <FormKit
+                            type="text"
+                            label="Remarque"
+                            validation="required"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.remarque"
+                        />
+                    </div>
+                    <div class="px-3">
+                        <FormKit
+                            type="text"
+                            label="Adresse"
+                            validation="required"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.adresse"
+                        />
+                    </div>
+                </div>
 
-        <div class="flex justify-center">
-            <div class="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
-                <h5 class="text-gray-900 text-xl leading-tight font-medium mb-2">Modifier.fournisseur</h5>
-                <form @submit.prevent="form.put(route('fournisseurs.update',fournisseur.id))">
-                    <div class="grid grid-cols-2 gap-4">
+                <div class="mx-3 md:flex mb-6">
+                    <div class="md:w-1/3 px-3 mb-6 md:mb-0">
+                        <FormKit
+                            type="text"
+                            label="Telephone Secondaire"
+                            validation="required|number"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.telSec"
+                        />
+                    </div>
+                    <div class="md:w-1/3 px-3">
+                        <FormKit
+                            type="number"
+                            label="Numero TVA"
+                            validation="required"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.numTVA"
+                        />
+                    </div>
+                </div>
+                <div class="mx-3 md:flex mb-6">
+                    <div class="md:w-full px-3">
+                        <FormKit
+                            type="checkbox"
+                            label="Actif"
+                            help="Est-ce que cette fournisseur actif?"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.active"
+                        />
+                    </div>
+                </div>
 
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Nom:</label>
-                            <input type="text" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput124"
-                                   v-model="form.nom"
-                                   aria-describedby="emailHelp124" placeholder="Nom">
-                        </div>
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Tel:</label>
-                            <input type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput123"
-                                   v-model="form.tel"
-                                   aria-describedby="emailHelp123" placeholder="tel">
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Email:</label>
-                            <input type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput123"
-                                   v-model="form.email"
-                                   aria-describedby="emailHelp123" placeholder="Email">
-                        </div>
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Taux Tva:</label>
-                            <input type="text" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput124"
-                                   v-model="form.tauxTVA"
-                                   aria-describedby="emailHelp124" placeholder="Taux TVA">
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Prix d'achat:</label>
-                            <input type="number" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput123"
-                                   v-model="form.prixAchat"
-                                   aria-describedby="emailHelp123" placeholder="Prix d'achat">
-                        </div>
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Code :</label>
-                            <input type="number" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput124"
-                                   v-model="form.code"
-                                   aria-describedby="emailHelp124" placeholder="Code">
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Remarque:</label>
-                            <input type="number" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput123"
-                                   v-model="form.remarque"
-                                   aria-describedby="emailHelp123" placeholder="Remarque">
-                        </div>
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Adresse:</label>
-                            <input type="number" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput124"
-                                   v-model="form.adresse"
-                                   aria-describedby="emailHelp124" placeholder="Adresse">
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Tel secondaire:</label>
-                            <input type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput123"
-                                   v-model="form.telSec"
-                                   aria-describedby="emailHelp123" placeholder="Telephone Secondaire">
-                        </div>
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Num TVA:</label>
-                            <input type="text" class="form-control block  w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput124"
-                                   v-model="form.numTVA"
-                                   aria-describedby="emailHelp124" placeholder="NUMERO TVA">
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="form-group mb-6">
-                            <label class="text-gray-900 text-base leading-tight mb-2">Active:</label>
-                            <input type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   id="exampleInput123"
-                                   v-model="form.active"
-                                   aria-describedby="emailHelp123" placeholder="EST ACTIVE ">
-                        </div>
-                    </div>
-
-                    <button type="submit"  class="w-full
-                                                  px-6
-                                                  py-2.5
-                                                  bg-blue-600
-                                                  text-white
-                                                  font-medium
-                                                  text-xs
-                                                  leading-tight
-                                                  uppercase
-                                                  rounded
-                                                  shadow-md
-                                                  hover:bg-blue-700 hover:shadow-lg
-                                                  focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
-                                                  active:bg-blue-800 active:shadow-lg
-                                                  transition
-                                                  duration-150
-                                                  ease-in-out">
-                        Ajouter
-                    </button>
-                </form>
-            </div>
-
+            </FormKit>
         </div>
-
-
     </AppLayout>
 </template>
 <script>
-import {reactive} from 'vue'
+import {FormKit} from '@formkit/vue'
 import {Inertia} from '@inertiajs/inertia'
 import {useForm, Link} from '@inertiajs/inertia-vue3'
 import AppLayout from '@/Layouts/AppLayout.vue'
+
+
 export default {
     props:{
-        fournisseur:Object,
+        fournisseur: Object,
+
+    },
+    methods: {
+        submitHandler(){
+            console.log(this.form);
+            Inertia.put(route('fournisseurs.update', this.$props.fournisseur.id), this.form);
+        },
     },
     setup(props) {
         const form = useForm({
@@ -155,6 +174,6 @@ export default {
         });
         return {form};
     },
-    components: {Link, AppLayout},
+    components: {Link, AppLayout,FormKit},
 }
 </script>

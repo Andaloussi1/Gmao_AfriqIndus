@@ -87,7 +87,7 @@
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.Total"
+                            v-model="form.total"
                         />
                     </div>
                     <div class="md:w-1/3 px-3">
@@ -131,7 +131,7 @@ export default {
     methods: {
         submitHandler(){
             console.log(this.form);
-            Inertia.post(route('commandes.update', this.$props.commande.id), this.form);
+            Inertia.put(route('commandes.update', this.$props.commande.id), this.form);
         },
     },
 

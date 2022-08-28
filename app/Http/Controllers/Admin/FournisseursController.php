@@ -63,6 +63,67 @@ class FournisseursController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nom' => [
+                'required',
+                'string',
+                'alpha',
+                'max:255',
+            ],
+            'tel' => [
+                'required',
+                'string',
+                'num',
+                'max:255',
+            ],
+            'email' => [
+                'required',
+                'string',
+                'alpha',
+                'max:255',
+            ],
+            'tauxTVA' => [
+                'required',
+                'numeric',
+            ],
+            'code' => [
+                'required',
+                'numeric',
+            ],
+            'remarque' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255'
+            ],
+            'type' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255',
+            ],
+            'adresse' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255',
+            ],
+            'numTVA' => [
+                'required',
+                'string',
+                'num',
+                'max:255',
+            ],
+            'telSec' => [
+                'required',
+                'numeric',
+            ],
+            'active' => [
+                'required',
+                'boolean',
+            ],
+        ]);
+
         Fournisseur::create([
             'nom' => $request->nom,
             'tel' =>$request->tel,
@@ -114,6 +175,66 @@ class FournisseursController extends Controller
      */
     public function update(Request $request, Fournisseur $fournisseur)
     {
+        $request->validate([
+            'nom' => [
+                'required',
+                'string',
+                'alpha',
+                'max:255',
+            ],
+            'tel' => [
+                'required',
+                'string',
+                'num',
+                'max:255',
+            ],
+            'email' => [
+                'required',
+                'string',
+                'alpha',
+                'max:255',
+            ],
+            'tauxTVA' => [
+                'required',
+                'numeric',
+            ],
+            'code' => [
+                'required',
+                'numeric',
+            ],
+            'remarque' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255'
+            ],
+            'type' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255',
+            ],
+            'adresse' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255',
+            ],
+            'numTVA' => [
+                'required',
+                'string',
+                'num',
+                'max:255',
+            ],
+            'telSec' => [
+                'required',
+                'numeric',
+            ],
+            'active' => [
+                'required',
+                'boolean',
+            ],
+        ]);
         $fournisseur->update([
             'nom' => $request->nom,
             'tel' =>$request->tel,
@@ -123,11 +244,11 @@ class FournisseursController extends Controller
             'remarque' => $request->remarque,
             'adresse' => $request->adresse,
             'numTVA' => $request->numTVA,
-            'active' => $request->active,
             'telSec' => $request->telSec,
+            'active' => $request->active,
         ]
         );
-        return Redirect::route('fournisseur.index');
+        return Redirect::route('fournisseurs.index');
     }
 
     /**

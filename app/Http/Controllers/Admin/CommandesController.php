@@ -57,8 +57,11 @@ class CommandesController extends Controller
 
         $articles = Article::all()->sortBy('nom')
             ->map->only('id','nom');
+            $fournisseurs = Fournisseur::all()->sortBy('nom')
+            ->map->only(['id','nom']);
         return inertia::render('Commandes/Create',[
             'articles' => $articles,
+            'fournisseurs' =>$fournisseurs,
         ]);
     }
 
@@ -70,6 +73,49 @@ class CommandesController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'titre' => [
+                'required',
+                'string',
+                'alpha',
+                'max:255',
+            ],
+            'description' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255',
+            ],
+            'adresseLivraison' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255',
+            ],
+            'dateCommande' => [
+                'required',
+                'date',
+            ],
+            'dateLivraison' => [
+                'required',
+                'date',
+            ],
+            'status' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255'
+            ],
+
+            'total' => [
+                'required',
+                'numeric',
+            ],
+            'totalHTVA' => [
+                'required',
+                'numeric',
+            ],
+        ]);
 
         $commande = Commande::create([
             'titre' => $request->titre,
@@ -127,6 +173,49 @@ class CommandesController extends Controller
      */
     public function update(Request $request, Commande $commande)
     {
+        $request->validate([
+            'titre' => [
+                'required',
+                'string',
+                'alpha',
+                'max:255',
+            ],
+            'description' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255',
+            ],
+            'adresseLivraison' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255',
+            ],
+            'dateCommande' => [
+                'required',
+                'date',
+            ],
+            'dateLivraison' => [
+                'required',
+                'date',
+            ],
+            'status' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255'
+            ],
+
+            'total' => [
+                'required',
+                'numeric',
+            ],
+            'totalHTVA' => [
+                'required',
+                'numeric',
+            ],
+        ]);
         $commande->update([
             'titre' => $request->titre,
             'description' =>$request->description,
