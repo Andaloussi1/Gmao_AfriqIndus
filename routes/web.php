@@ -43,6 +43,7 @@ Route::middleware([
     Route::resource('fournisseurs', FournisseursController::class);
     Route::resource('interventions', InterventionsController::class);
     Route::resource('techniciens', TechniciensController::class);
+    Route::resource('outils', OutilsController::class);
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
