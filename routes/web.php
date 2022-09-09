@@ -4,7 +4,6 @@ use App\Http\Controllers\Admin\ArticlesController;
 use App\Http\Controllers\Admin\CommandesController;
 use App\Http\Controllers\Admin\FournisseursController;
 use App\Http\Controllers\Admin\InterventionsController;
-use App\Http\Controllers\MediaController;
 use App\Http\Controllers\Technicien\TechniciensController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -38,11 +37,12 @@ Route::middleware([
 ])->group(function () {
     Route::resource('articles', ArticlesController::class)->except("update");
     Route::post('/articles/{id}',[ArticlesController::class, 'update'])->name('articles.update');
-    Route::resource('media', MediaController::class);
     Route::resource('commandes', CommandesController::class);
     Route::resource('fournisseurs', FournisseursController::class);
     Route::resource('interventions', InterventionsController::class);
     Route::resource('techniciens', TechniciensController::class);
+    Route::resource('outils', \App\Http\Controllers\OutilController::class);
+    Route::resource('acquisitionsoutils', \App\Http\Controllers\AcquisitionOutilController::class);
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');

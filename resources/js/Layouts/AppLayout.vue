@@ -60,10 +60,18 @@ const logout = () => {
                                         :href="route('fournisseurs.index')" :active="route().current('fournisseurs.index')">
                                         Fournisseurs
                                     </JetNavLink>
+                                    <JetNavLink v-if="$page.props.user.role_id"
+                                                :href="route('outils.index')" :active="route().current('outils.index')">
+                                        Outils
+                                    </JetNavLink>
+                                    <JetNavLink v-if="$page.props.user.role_id"
+                                                :href="route('acquisitionsoutils.index')" :active="route().current('acquisitionsoutils.index')">
+                                        Acquésition des outils
+                                    </JetNavLink>
 
-                                <JetNavLink v-if="!$page.props.user.role_id" :href="route('commandes.index')" :active="route().current('commandes.index')">
-                                    Commandes
-                                </JetNavLink>
+                                    <JetNavLink v-if="!$page.props.user.role_id" :href="route('commandes.index')" :active="route().current('commandes.index')">
+                                        Commandes
+                                    </JetNavLink>
 
                             </div>
                         </div>

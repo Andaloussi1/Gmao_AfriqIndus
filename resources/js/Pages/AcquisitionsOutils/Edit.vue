@@ -1,9 +1,11 @@
+
+
 <template>
 
-    <AppLayout title=" Fournisseur">
+    <AppLayout title="Article">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Ajouter un Fournisseur
+                Créer Article
             </h2>
 
         </template>
@@ -14,20 +16,21 @@
                 submit-label="Ajouter"
                 @submit="submitHandler"
             >
-                <div class="text-red-600" v-if="Object.keys(errors).length">
-                <ul v-for="error in errors">
-                    <li>{{ error }}</li>
-                </ul>
-        </div>
                 <div class="mx-3 md:flex mb-6">
+                    <div class="px-3 mb-6 md:mb-0">
+                        <FormKit
+                            type="text"
+                            label="Reference"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.reference"
+                        />
+                    </div>
                     <div class="px-3">
                         <FormKit
                             type="text"
                             label="Nom"
-                            :validation="[['required'], ['matches', /^[A-zÀ\s]+$/]]"
-                            :validation-messages="{
-                                matches: 'Nom ne doit pas contenir des chiffres',
-                            }"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -37,23 +40,21 @@
                     <div class="px-3">
                         <FormKit
                             type="text"
-                            label="Telephone"
-                            validation="required|number"
+                            label="Marque"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.tel"
+                            v-model="form.marque"
                         />
                     </div>
                     <div class="px-3">
                         <FormKit
-                            type="email"
-                            label="Email"
-                            validation="required|email"
+                            type="text"
+                            label="Type"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.email"
+                            v-model="form.type"
                         />
                     </div>
                 </div>
@@ -61,45 +62,21 @@
                     <div class="px-3 mb-6 md:mb-0">
                         <FormKit
                             type="number"
-                            label="Taux TVA"
-                            validation="required"
+                            label="Prix d'achat"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.tauxTVA"
+                            v-model="form.prixAchat"
                         />
                     </div>
                     <div class="px-3">
                         <FormKit
                             type="number"
-                            label="Code"
-                            validation="required"
+                            label="Prix de vente"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.code"
-                        />
-                    </div>
-                    <div class="px-3">
-                        <FormKit
-                            type="text"
-                            label="Remarque"
-                            validation="required"
-                            label-class="block mb-2 font-bold text-sm"
-                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.remarque"
-                        />
-                    </div>
-                    <div class="px-3">
-                        <FormKit
-                            type="text"
-                            label="Adresse"
-                            validation="required"
-                            label-class="block mb-2 font-bold text-sm"
-                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.adresse"
+                            v-model="form.prixVente"
                         />
                     </div>
                 </div>
@@ -108,43 +85,75 @@
                     <div class="md:w-1/3 px-3 mb-6 md:mb-0">
                         <FormKit
                             type="text"
-                            label="Telephone Secondaire"
-                            validation="required|number"
+                            label="Emplacement"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.telSec"
+                            v-model="form.emplacement"
+                        />
+                    </div>
+                    <div class="md:w-1/3 px-3">
+                        <FormKit
+                            type="text"
+                            label="Designation"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.designation"
+                        />
+                    </div>
+                    <div class="md:w-1/3 px-3">
+                        <FormKit
+                            type="text"
+                            label="Unité"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.unite"
+                        />
+                    </div>
+                </div>
+                <div class="mx-3 md:flex mb-6">
+                    <div class="md:w-1/3 px-3 mb-6 md:mb-0">
+                        <FormKit
+                            type="number"
+                            label="Stock initiale"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.niveauStock"
                         />
                     </div>
                     <div class="md:w-1/3 px-3">
                         <FormKit
                             type="number"
-                            label="Numero TVA"
-                            validation="required"
+                            label="Stock minimal"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.numTVA"
+                            v-model="form.stockMin"
                         />
                     </div>
                 </div>
-                <div class="mx-3 md:flex mb-6">
-                    <div class="md:w-full px-3">
-                        <FormKit
-                            type="checkbox"
-                            label="Actif"
-                            help="Est-ce que cette fournisseur actif?"
-                            label-class="block mb-2 font-bold text-sm"
-                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.active"
-                        />
-                    </div>
+                <div class="mx-3 px-3 mb-6 md:mb-0">
+                    <FormKit
+                        type="select"
+                        label="Fournisseur"
+                        placeholder="Choisissez un fournisseur"
+                        :options=fournisseursObj
+                        v-model="form.fournisseur_id"
+                    />
                 </div>
-
+                <div class="mx-3 px-3 mb-6 md:mb-0">
+                    <FormKit
+                        type="file"
+                        label="Image"
+                        @change="form.images = $event.target.files;"
+                        multiple
+                    />
+                </div>
             </FormKit>
         </div>
-
 
     </AppLayout>
 </template>
@@ -152,30 +161,34 @@
 import {Inertia} from '@inertiajs/inertia'
 import {useForm, Link} from '@inertiajs/inertia-vue3'
 import AppLayout from '@/Layouts/AppLayout.vue'
+import {FormKit} from '@formkit/vue'
 export default {
-    props: {
-        errors: Object,
+    props:{
+        fournisseurs:Object,
     },
     methods: {
         submitHandler() {
-            Inertia.post(route('fournisseurs.store'), this.form);
+            Inertia.post(route('articles.store'), this.form);
         },
     },
-    setup() {
+    setup(props) {
         const form = useForm({
             nom: "",
-            tel: "",
-            email: "",
-            tauxTVA: "",
-            code: "",
-            remarque: "",
-            adresse: "",
-            telSec: "",
-            numTVA: "",
-            active: false,
+            reference: "",
+            marque: "",
+            prixAchat: "",
+            prixVente: "",
+            emplacement: "",
+            type: "",
+            unite: "",
+            designation: "",
+            stockMin: "",
+            niveauStock: "",
+            fournisseur_id:"",
+            images: []
         });
         return {form};
     },
-    components: {Link, AppLayout},
+    components: {Link, AppLayout, FormKit},
 }
 </script>

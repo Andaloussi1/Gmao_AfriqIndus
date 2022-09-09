@@ -73,13 +73,12 @@ class FournisseursController extends Controller
             'tel' => [
                 'required',
                 'string',
-                'num',
-                'max:255',
+                'numeric',
             ],
             'email' => [
                 'required',
                 'string',
-                'alpha',
+                'email:filter',
                 'max:255',
             ],
             'tauxTVA' => [
@@ -96,12 +95,6 @@ class FournisseursController extends Controller
                 'alpha_num',
                 'max:255'
             ],
-            'type' => [
-                'required',
-                'string',
-                'alpha_num',
-                'max:255',
-            ],
             'adresse' => [
                 'required',
                 'string',
@@ -111,7 +104,7 @@ class FournisseursController extends Controller
             'numTVA' => [
                 'required',
                 'string',
-                'num',
+                'numeric',
                 'max:255',
             ],
             'telSec' => [

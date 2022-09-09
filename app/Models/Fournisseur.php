@@ -16,6 +16,11 @@ class Fournisseur extends Model
         return $this->hasMany(Article::class);
     }
 
+    public function acquisitionOutil(): HasMany
+    {
+        return $this->hasMany(AcquisitionOutil::class);
+    }
+
     public function bonCommande(): HasMany
     {
         return $this->hasMany(BonCommande::class);
