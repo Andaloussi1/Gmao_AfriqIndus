@@ -127,7 +127,7 @@
                 </div>
             </FormKit>
             <div v-if="isHidden"
-                 class=" h-fit w-fit h-fit absolute bg-gray-300 border-2 border-b-gray-400 shadow-md rounded mt-52 px-8 pt-6  mb-4 flex items-center justify-center my-2">
+                 class=" h-fit w-fit h-fit absolute bg-gray-50 border-2 border-b-gray-400 shadow-md rounded mt-52 px-8 pt-6  mb-4 flex items-center justify-center my-2">
                 <div>
                     <div class="hover:bg-gray-400 rounded-full pt-1.5 h-fit w-fit">
                         <button type="button" @click="isHidden=!isHidden">
@@ -138,7 +138,7 @@
                         </button>
 
                     </div>
-                    <p class="font-semibold text-xl text-gray-800 leading-tight pl-72 mb-5 ">Ajouter un nouveau article</p>
+                    <p class="font-semibold text-xl text-grey-800 leading-tight pl-72 mb-5 ">Ajouter un nouveau article</p>
                     <FormKit
                         type="form"
                         submit-label="Ajouter"

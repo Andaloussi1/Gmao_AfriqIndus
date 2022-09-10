@@ -67,7 +67,7 @@ class FournisseursController extends Controller
             'nom' => [
                 'required',
                 'string',
-                'alpha',
+                'regex:/^[A-zÀ-ú\s]*$/',
                 'max:255',
             ],
             'tel' => [
@@ -92,13 +92,13 @@ class FournisseursController extends Controller
             'remarque' => [
                 'required',
                 'string',
-                'alpha_num',
+                'regex:/^[A-zÀ-ú\s]*$/',
                 'max:255'
             ],
             'adresse' => [
                 'required',
                 'string',
-                'alpha_num',
+                'regex:/^[\s\w-]*$/',
                 'max:255',
             ],
             'numTVA' => [
@@ -255,5 +255,76 @@ class FournisseursController extends Controller
         $fournisseur->delete();
 
         return Redirect::route('fournisseurs.index');
+    }
+
+    public function modal(Request $request)
+    {
+        $request->validate([
+            'nom' => [
+                'required',
+                'string',
+                'regex:/^[A-zÀ-ú\s]*$/',
+                'max:255',
+            ],
+            'tel' => [
+                'required',
+                'string',
+                'numeric',
+            ],
+            'email' => [
+                'required',
+                'string',
+                'email:filter',
+                'max:255',
+            ],
+            'tauxTVA' => [
+                'required',
+                'numeric',
+            ],
+            'code' => [
+                'required',
+                'numeric',
+            ],
+            'remarque' => [
+                'required',
+                'string',
+                'regex:/^[A-zÀ-ú\s]*$/',
+                'max:255'
+            ],
+            'adresse' => [
+                'required',
+                'string',
+                'regex:/^[\s\w-]*$/',
+                'max:255',
+            ],
+            'numTVA' => [
+                'required',
+                'string',
+                'numeric',
+                'max:255',
+            ],
+            'telSec' => [
+                'required',
+                'numeric',
+            ],
+            'active' => [
+                'required',
+                'boolean',
+            ],
+        ]);
+
+        Fournisseur::create([
+            'nom' => $request->nom,
+            'tel' =>$request->tel,
+            'email' => $request->email,
+            'tauxTVA' => $request->tauxTVA,
+            'code' => $request->code,
+            'remarque' => $request->remarque,
+            'adresse' => $request->adresse,
+            'numTVA' => $request->numTVA,
+            'active' => $request->active,
+            'telSec' => $request->telSec,
+        ]);
+
     }
 }

@@ -57,6 +57,17 @@
                             v-model="form.type"
                         />
                     </div>
+                    <div class="px-3">
+                        <FormKit
+                            type="text"
+                            label="Type"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.stock"
+                        />
+                    </div>
+
                 </div>
             </FormKit>
         </div>
@@ -71,8 +82,6 @@ import {FormKit} from '@formkit/vue'
 export default {
     props:{
         outil:Object,
-        fournisseurs: Object,
-        media: Object,
     },
     methods: {
         submitHandler() {
@@ -85,6 +94,7 @@ export default {
             reference: props.outil.reference,
             marque: props.outil.marque,
             type: props.outil.type,
+            stock: props.outil.stock,
         });
         return {form};
     },
