@@ -31,7 +31,7 @@ class AcquisitionOutilController extends Controller
                 'id'=>$acquisition_outils->id,
                 'outil'=>$acquisition_outils->outil? $acquisition_outils->outil->reference:null,
                 'prix'=>$acquisition_outils->prix,
-                'date'=>$acquisition_outils->prixVente,
+                'date'=>$acquisition_outils->date,
                 'periode'=>$acquisition_outils->periode,
                 'periodicite'=>$acquisition_outils->periodicite,
                 'quantite'=>$acquisition_outils->quantite,
@@ -107,9 +107,15 @@ class AcquisitionOutilController extends Controller
      * @param  \App\Models\AcquisitionOutil  $acquisitionOutil
      * @return \Illuminate\Http\Response
      */
-    public function show(AcquisitionOutil $acquisitionOutil)
+    public function show($id)
     {
-        dd($acquisitionOutil);
+        $acquisitionOutil = AcquisitionOutil::find($id);
+
+        return Inertia::render('AcquisitionsOutils/Show', [
+            'acquisitionOutil' => $acquisitionOutil,
+            'fournisseur' => $acquisitionOutil->fournisseur,
+            'outil' => $acquisitionOutil->outil,
+        ]);
     }
 
     /**

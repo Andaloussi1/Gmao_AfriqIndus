@@ -122,98 +122,108 @@
                     <FormKit type="file" label="Image" @change="form.images = $event.target.files;" multiple />
                 </div>
             </FormKit>
-                <div v-if="isHidden"
-                    class=" h-fit w-fit absolute bg-gray-50 border-2 border-b-gray-400 shadow-md rounded mt-40 px-8 pt-6 py-8 mb-4 flex items-center justify-center my-2">
-                    <div class="hover:bg-gray-300 mb-96 rounded">
-                        <button type="button" @click="isHidden=!isHidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-                    </div>
-
-                    <div>
-                        <p class="font-semibold text-xl text-gray-800 leading-tight pl-72 mb-5">Ajouter un nouveau
-                            fournisseur
-                        </p>
-                        <FormKit type="form" submit-label="Ajouter" @submit="fournisseurSubmitHandler">
-                            <div class="mx-3 md:flex mb-6">
-                                <div class="px-3">
-                                    <FormKit type="text" label="Nom" label-class="block mb-2 font-bold text-sm"
-                                        inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                                        input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                        v-model="fournisseurForm.nom" />
-                                </div>
-                                <div class="px-3">
-                                    <FormKit type="text" label="Telephone" label-class="block mb-2 font-bold text-sm"
-                                        inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                                        input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                        v-model="fournisseurForm.tel" />
-                                </div>
-                                <div class="px-3">
-                                    <FormKit type="email" label="Email" label-class="block mb-2 font-bold text-sm"
-                                        inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                                        input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                        v-model="fournisseurForm.email" />
-                                </div>
-                            </div>
-                            <div class="mx-3 md:flex mb-6">
-                                <div class="px-3 mb-6 md:mb-0">
-                                    <FormKit type="number" label="Taux TVA" label-class="block mb-2 font-bold text-sm"
-                                        inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                                        input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                        v-model="fournisseurForm.tauxTVA" />
-                                </div>
-                                <div class="px-3">
-                                    <FormKit type="number" label="Code" label-class="block mb-2 font-bold text-sm"
-                                        inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                                        input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                        v-model="fournisseurForm.code" />
-                                </div>
-                                <div class="px-3">
-                                    <FormKit type="text" label="Remarque" label-class="block mb-2 font-bold text-sm"
-                                        inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                                        input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                        v-model="fournisseurForm.remarque" />
-                                </div>
-                                <div class="px-3">
-                                    <FormKit type="text" label="Adresse" label-class="block mb-2 font-bold text-sm"
-                                        inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                                        input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                        v-model="fournisseurForm.adresse" />
-                                </div>
-                            </div>
-
-                            <div class="mx-3 md:flex mb-6">
-                                <div class="md:w-1/3 px-3 mb-6 md:mb-0">
-                                    <FormKit type="text" label="Telephone Secondaire"
-                                        label-class="block mb-2 font-bold text-sm"
-                                        inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                                        input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                        v-model="fournisseurForm.telSec" />
-                                </div>
-                                <div class="md:w-1/3 px-3">
-                                    <FormKit type="number" label="Numero TVA" label-class="block mb-2 font-bold text-sm"
-                                        inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                                        input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                        v-model="fournisseurForm.numTVA" />
-                                </div>
-                            </div>
-                            <div class="mx-3 md:flex mb-6">
-                                <div class="md:w-full px-3">
-                                    <FormKit type="checkbox" label="Actif" help="Est-ce que ce fournisseur actif?"
-                                        label-class="block mb-2 font-bold text-sm"
-                                        inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                                        input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                        v-model="fournisseurForm.active" />
-                                </div>
-                            </div>
-                        </FormKit>
-                    </div>
+            <div v-if="isHidden"
+                class=" h-fit w-fit absolute bg-gray-50 border-2 border-b-gray-400 shadow-md rounded mt-40 px-8 pt-6 py-8 mb-4 flex items-center justify-center my-2">
+                <div class="hover:bg-gray-300 mb-96 rounded">
+                    <button type="button" @click="isHidden=!isHidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
 
-            
+                <div>
+                    <p class="font-semibold text-xl text-gray-800 leading-tight pl-72 mb-5">Ajouter un nouveau
+                        fournisseur
+                    </p>
+                    <FormKit type="form" submit-label="Ajouter" @submit="fournisseurSubmitHandler">
+                        <div class="mx-3 md:flex mb-6">
+                            <div class="px-3">
+                                <FormKit type="text" label="Nom" label-class="block mb-2 font-bold text-sm"
+                                    :validation="[['required'], ['matches', /^[A-zÀ\s]+$/]]" :validation-messages="{
+                                        matches: 'Nom ne doit pas contenir des chiffres',
+                                    }"
+                                    inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                                    input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                                    v-model="fournisseurForm.nom" />
+                            </div>
+                            <div class="px-3">
+                                <FormKit type="text" label="Telephone" label-class="block mb-2 font-bold text-sm"
+                                    validation="required|number"
+                                    inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                                    input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                                    v-model="fournisseurForm.tel" />
+                            </div>
+                            <div class="px-3">
+                                <FormKit type="email" label="Email" label-class="block mb-2 font-bold text-sm"
+                                    validation="required|email"
+                                    inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                                    input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                                    v-model="fournisseurForm.email" />
+                            </div>
+                        </div>
+                        <div class="mx-3 md:flex mb-6">
+                            <div class="px-3 mb-6 md:mb-0">
+                                <FormKit type="number" label="Taux TVA" label-class="block mb-2 font-bold text-sm"
+                                    validation="required"
+                                    inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                                    input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                                    v-model="fournisseurForm.tauxTVA" />
+                            </div>
+                            <div class="px-3">
+                                <FormKit type="number" label="Code" label-class="block mb-2 font-bold text-sm"
+                                    validation="required"
+                                    inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                                    input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                                    v-model="fournisseurForm.code" />
+                            </div>
+                            <div class="px-3">
+                                <FormKit type="text" label="Remarque" label-class="block mb-2 font-bold text-sm"
+                                    validation="required"
+                                    inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                                    input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                                    v-model="fournisseurForm.remarque" />
+                            </div>
+                            <div class="px-3">
+                                <FormKit type="text" label="Adresse" label-class="block mb-2 font-bold text-sm"
+                                    validation="required"
+                                    inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                                    input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                                    v-model="fournisseurForm.adresse" />
+                            </div>
+                        </div>
+
+                        <div class="mx-3 md:flex mb-6">
+                            <div class="md:w-1/3 px-3 mb-6 md:mb-0">
+                                <FormKit type="text" label="Telephone Secondaire" validation="required|number"
+                                    label-class="block mb-2 font-bold text-sm"
+                                    inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                                    input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                                    v-model="fournisseurForm.telSec" />
+                            </div>
+                            <div class="md:w-1/3 px-3">
+                                <FormKit type="number" label="Numero TVA" label-class="block mb-2 font-bold text-sm"
+                                    validation="required"
+                                    inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                                    input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                                    v-model="fournisseurForm.numTVA" />
+                            </div>
+                        </div>
+                        <div class="mx-3 md:flex mb-6">
+                            <div class="md:w-full px-3">
+                                <FormKit type="checkbox" label="Actif" help="Est-ce que ce fournisseur actif?"
+                                    label-class="block mb-2 font-bold text-sm"
+                                    inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                                    input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                                    v-model="fournisseurForm.active" />
+                            </div>
+                        </div>
+                    </FormKit>
+                </div>
+            </div>
+
+
         </div>
     </AppLayout>
 </template>
@@ -242,27 +252,10 @@ export default {
         submitHandler() {
             Inertia.post(route('articles.store'), this.form);
         }, fournisseurSubmitHandler() {
-            console.log(this.fournisseurForm)
-            Inertia.visit(route('fournisseurs.modal'), {
-                method: 'post', data: {
-                    nom: this.fournisseurForm.nom,
-                    tel: this.fournisseurForm.tel,
-                    telSec: this.fournisseurForm.telSec,
-                    remarque: this.fournisseurForm.remarque,
-                    adresse: this.fournisseurForm.adresse,
-                    email: this.fournisseurForm.email,
-                    numTVA: this.fournisseurForm.numTVA,
-                    active: this.fournisseurForm.active,
-                    code: this.fournisseurForm.code,
-                    tauxTVA: this.fournisseurForm.tauxTVA,
-                }
-                
-            },)
+            Inertia.post(route('fournisseurs.modal'), this.fournisseurForm);
+
             this.isHidden = false
             //Inertia.post(route('fournisseurs.store'), this.fournisseurForm);
-        },
-        upload() {
-            console.log($event.target.files);
         },
     },
 

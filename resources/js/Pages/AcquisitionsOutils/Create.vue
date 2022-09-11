@@ -2,7 +2,7 @@
 
 <template>
 
-    <AppLayout title="Outil">
+    <AppLayout title="Acquesition d'Outil">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                  Acquérir un outil

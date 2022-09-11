@@ -84,7 +84,10 @@ class OutilController extends Controller
      */
     public function show(Outil $outil)
     {
-        dd($outil);
+        return Inertia::render('Outils/Show', [
+            'outil' => $outil,
+        ]);
+        
     }
 
     /**

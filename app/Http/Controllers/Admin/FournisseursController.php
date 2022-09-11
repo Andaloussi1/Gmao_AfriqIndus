@@ -326,5 +326,7 @@ class FournisseursController extends Controller
             'telSec' => $request->telSec,
         ]);
 
+        return Redirect::route('articles.create');
+
     }
 }
