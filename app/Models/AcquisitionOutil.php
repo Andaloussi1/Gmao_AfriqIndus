@@ -10,7 +10,7 @@ class AcquisitionOutil extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['reference', 'date', 'prix', 'louer', 'periode', 'periodicite', 'quantite', 'outil_id', 'fournisseur_id'];
+    protected $fillable = ['date', 'prix', 'louer', 'periode', 'periodicite', 'quantite', 'outil_id', 'fournisseur_id'];
 
     public function fournisseur(): BelongsTo
     {

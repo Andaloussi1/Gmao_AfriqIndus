@@ -2,10 +2,10 @@
 
 <template>
 
-    <AppLayout title="Article">
+    <AppLayout title="AcquisitionOutil">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Créer Article
+                Modifier Acquisition Outils
             </h2>
 
         </template>
@@ -17,140 +17,53 @@
                 @submit="submitHandler"
             >
                 <div class="mx-3 md:flex mb-6">
-                    <div class="px-3 mb-6 md:mb-0">
+                    <div class="px-3">
                         <FormKit
-                            type="text"
-                            label="Reference"
+                            type="date"
+                            label="Date"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.reference"
+                            v-model="form.date"
                         />
                     </div>
                     <div class="px-3">
                         <FormKit
-                            type="text"
-                            label="Nom"
+                            type="number"
+                            label="Prix"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.nom"
-                        />
-                    </div>
-                    <div class="px-3">
-                        <FormKit
-                            type="text"
-                            label="Marque"
-                            label-class="block mb-2 font-bold text-sm"
-                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.marque"
-                        />
-                    </div>
-                    <div class="px-3">
-                        <FormKit
-                            type="text"
-                            label="Type"
-                            label-class="block mb-2 font-bold text-sm"
-                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.type"
+                            v-model="form.prix"
                         />
                     </div>
                 </div>
                 <div class="mx-3 md:flex mb-6">
                     <div class="px-3 mb-6 md:mb-0">
                         <FormKit
-                            type="number"
-                            label="Prix d'achat"
+                            type="date"
+                            label="Periode"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.prixAchat"
+                            v-model="form.periode"
                         />
                     </div>
                     <div class="px-3">
                         <FormKit
-                            type="number"
-                            label="Prix de vente"
+                            type="select"
+                            :options="{
+                                mois: 'Mois',
+                                jours: 'Jours',
+                                ans: 'Ans',
+                            }"
+                            label="Periodicite"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.prixVente"
+                            v-model="form.periodicite"
                         />
                     </div>
-                </div>
-
-                <div class="mx-3 md:flex mb-6">
-                    <div class="md:w-1/3 px-3 mb-6 md:mb-0">
-                        <FormKit
-                            type="text"
-                            label="Emplacement"
-                            label-class="block mb-2 font-bold text-sm"
-                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.emplacement"
-                        />
-                    </div>
-                    <div class="md:w-1/3 px-3">
-                        <FormKit
-                            type="text"
-                            label="Designation"
-                            label-class="block mb-2 font-bold text-sm"
-                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.designation"
-                        />
-                    </div>
-                    <div class="md:w-1/3 px-3">
-                        <FormKit
-                            type="text"
-                            label="Unité"
-                            label-class="block mb-2 font-bold text-sm"
-                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.unite"
-                        />
-                    </div>
-                </div>
-                <div class="mx-3 md:flex mb-6">
-                    <div class="md:w-1/3 px-3 mb-6 md:mb-0">
-                        <FormKit
-                            type="number"
-                            label="Stock initiale"
-                            label-class="block mb-2 font-bold text-sm"
-                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.niveauStock"
-                        />
-                    </div>
-                    <div class="md:w-1/3 px-3">
-                        <FormKit
-                            type="number"
-                            label="Stock minimal"
-                            label-class="block mb-2 font-bold text-sm"
-                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.stockMin"
-                        />
-                    </div>
-                </div>
-                <div class="mx-3 px-3 mb-6 md:mb-0">
-                    <FormKit
-                        type="select"
-                        label="Fournisseur"
-                        placeholder="Choisissez un fournisseur"
-                        :options=fournisseursObj
-                        v-model="form.fournisseur_id"
-                    />
-                </div>
-                <div class="mx-3 px-3 mb-6 md:mb-0">
-                    <FormKit
-                        type="file"
-                        label="Image"
-                        @change="form.images = $event.target.files;"
-                        multiple
-                    />
                 </div>
             </FormKit>
         </div>
@@ -164,28 +77,19 @@ import AppLayout from '@/Layouts/AppLayout.vue'
 import {FormKit} from '@formkit/vue'
 export default {
     props:{
-        fournisseurs:Object,
+        acquisitionsOutils:Object,
     },
     methods: {
         submitHandler() {
-            Inertia.post(route('articles.store'), this.form);
+            Inertia.post(route('acquisitionsoutils.update'), this.form);
         },
     },
     setup(props) {
         const form = useForm({
-            nom: "",
-            reference: "",
-            marque: "",
-            prixAchat: "",
-            prixVente: "",
-            emplacement: "",
-            type: "",
-            unite: "",
-            designation: "",
-            stockMin: "",
-            niveauStock: "",
-            fournisseur_id:"",
-            images: []
+            date: "",
+            prix: "",
+            periode: "",
+            periodicite: "",
         });
         return {form};
     },

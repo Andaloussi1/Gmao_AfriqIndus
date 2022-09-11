@@ -129,8 +129,8 @@ class CommandesController extends Controller
         ]);
 
         $commande->articles()->attach($request->articles);
-
-
+ 
+        
 
 
         return Redirect::route('commandes.index');

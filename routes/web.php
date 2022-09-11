@@ -39,6 +39,7 @@ Route::middleware([
     Route::post('/articles/{id}',[ArticlesController::class, 'update'])->name('articles.update');
     Route::resource('commandes', CommandesController::class);
     Route::resource('fournisseurs', FournisseursController::class);
+    Route::post('/fournisseurs/modal',[FournisseursController::class, 'modal'])->name('fournisseurs.modal');
     Route::resource('interventions', InterventionsController::class);
     Route::resource('techniciens', TechniciensController::class);
     Route::resource('outils', \App\Http\Controllers\OutilController::class);
