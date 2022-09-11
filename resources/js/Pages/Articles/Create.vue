@@ -252,9 +252,12 @@ export default {
         submitHandler() {
             Inertia.post(route('articles.store'), this.form);
         }, fournisseurSubmitHandler() {
-            Inertia.post(route('fournisseurs.modal'), this.fournisseurForm);
+            Inertia.post(route('fournisseurs.modal'), this.fournisseurForm, {
+                onSuccess:() => Inertia.get(route('articles.create')),
+            });
+            this.isHidden = false;
 
-            this.isHidden = false
+
             //Inertia.post(route('fournisseurs.store'), this.fournisseurForm);
         },
     },

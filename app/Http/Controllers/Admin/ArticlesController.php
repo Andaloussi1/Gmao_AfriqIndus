@@ -158,7 +158,7 @@ class ArticlesController extends Controller
             'emplacement' => [
                 'required',
                 'string',
-                'alpha_num',
+                'regex:/^[\s\w-]*$/',
                 'max:255'
             ],
             'type' => [
