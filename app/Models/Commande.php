@@ -13,7 +13,7 @@ class Commande extends Model
 
     public function articles(): BelongsToMany
     {
-        return $this->belongsToMany(Article::class);
-        //Or: return $this->hasMany(Post::class, 'foreign_key');
+        return $this->belongsToMany(Article::class)
+                ->withPivot(['quantite']);
     }
 }
