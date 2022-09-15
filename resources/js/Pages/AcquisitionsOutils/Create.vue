@@ -45,6 +45,7 @@
                         <FormKit
                             type="number"
                             label="Periode"
+                            validation="required"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -60,6 +61,7 @@
                                 jours: 'Jours',
                                 ans: 'Ans',
                             }"
+                            validation="required"
                             label="Periodicité"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
@@ -73,6 +75,7 @@
                         <FormKit
                             type="date"
                             label="Date"
+                            validation="required"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -83,6 +86,7 @@
                         <FormKit
                             type="number"
                             label="Quantite"
+                            validation="required"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -93,6 +97,7 @@
                         <FormKit
                             type="number"
                             label="Prix"
+                            validation="required"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"

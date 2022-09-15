@@ -141,7 +141,8 @@
                         <div class="mx-3 md:flex mb-6">
                             <div class="px-3">
                                 <FormKit type="text" label="Nom" label-class="block mb-2 font-bold text-sm"
-                                    :validation="[['required'], ['matches', /^[A-zÀ\s]+$/]]" :validation-messages="{
+                                    :validation="[['required'], ['matches', /^[A-zÀ-ú\s]+$/]]" 
+                                    :validation-messages="{
                                         matches: 'Nom ne doit pas contenir des chiffres',
                                     }"
                                     inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"

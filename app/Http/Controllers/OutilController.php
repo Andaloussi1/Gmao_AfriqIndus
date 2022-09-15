@@ -63,6 +63,37 @@ class OutilController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'reference' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255',
+            ],
+            'nom' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255',
+            ],
+            'marque' => [
+                'required',
+                'string',
+                'regex:/^[\s\w-]*$/',
+                'max:255',
+            ],
+            'type' => [
+                'required',
+                'alpha_num',
+            ],
+            'stock' => [
+                'required',
+                'numeric',
+            ],
+
+            
+
+        ]);
         Outil::create([
             'nom' => $request->nom,
             'reference' =>$request->reference,
@@ -112,6 +143,36 @@ class OutilController extends Controller
      */
     public function update(Request $request, Outil $outil)
     {
+        $request->validate([
+            'reference' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255',
+            ],
+            'nom' => [
+                'required',
+                'string',
+                'alpha_num',
+                'max:255',
+            ],
+            'marque' => [
+                'required',
+                'string',
+                'regex:/^[\s\w-]*$/',
+                'max:255',
+            ],
+            'type' => [
+                'required',
+                'alpha_num',
+            ],
+            'stock' => [
+                'required',
+                'numeric',
+            ],   
+        ]);
+
+
         $outil->update([
                 'nom' => $request->nom,
                 'reference' =>$request->reference,

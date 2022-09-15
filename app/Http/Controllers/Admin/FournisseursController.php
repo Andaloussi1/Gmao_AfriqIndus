@@ -103,7 +103,6 @@ class FournisseursController extends Controller
             ],
             'numTVA' => [
                 'required',
-                'string',
                 'numeric',
                 'max:255',
             ],
@@ -172,19 +171,18 @@ class FournisseursController extends Controller
             'nom' => [
                 'required',
                 'string',
-                'alpha',
+                'regex:/^[A-zÀ-ú\s]*$/',
                 'max:255',
             ],
             'tel' => [
                 'required',
                 'string',
-                'num',
-                'max:255',
+                'numeric',
             ],
             'email' => [
                 'required',
                 'string',
-                'alpha',
+                'email:filter',
                 'max:255',
             ],
             'tauxTVA' => [
@@ -198,25 +196,18 @@ class FournisseursController extends Controller
             'remarque' => [
                 'required',
                 'string',
-                'alpha_num',
+                'regex:/^[A-zÀ-ú\s]*$/',
                 'max:255'
-            ],
-            'type' => [
-                'required',
-                'string',
-                'alpha_num',
-                'max:255',
             ],
             'adresse' => [
                 'required',
                 'string',
-                'alpha_num',
+                'regex:/^[\s\w-]*$/',
                 'max:255',
             ],
             'numTVA' => [
                 'required',
-                'string',
-                'num',
+                'numeric',
                 'max:255',
             ],
             'telSec' => [

@@ -14,6 +14,12 @@
                 submit-label="Ajouter"
                 @submit="submitHandler"
             >
+            <div class="text-red-600" v-if="Object.keys(errors).length">
+                    <ul v-for="error in errors">
+                        <li>{{ error }}</li>
+                    </ul>
+                </div>
+                
               <div class="mx-3 md:flex mb-6">
                     <div class="px-3 mb-6 md:mb-0">
                         <FormKit
@@ -126,6 +132,7 @@ export default {
     props:{
         commande:Object,
         articles:Object,
+        errors:Object,
     },
 
     methods: {
