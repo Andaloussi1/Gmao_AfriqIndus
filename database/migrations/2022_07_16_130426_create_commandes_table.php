@@ -21,8 +21,6 @@ return new class extends Migration
             $table->date('dateCommande');
             $table->date('dateLivraison');
             $table->string('status');
-            $table->double('total');
-            $table->double('totalHTVA');
             $table->timestamps();
         });
     }

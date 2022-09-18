@@ -20,8 +20,6 @@ return new class extends Migration
             $table->string('description');
             $table->date('date_livraison');
             $table->string('status');
-            $table->double('total');
-            $table->double('totalHTVA');
             $table->string('adresse_livraison');
             $table->foreignId("fournisseur_id")->constrained();
             $table->timestamps();

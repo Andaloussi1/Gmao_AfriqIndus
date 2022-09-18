@@ -55,27 +55,31 @@
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
                             v-model="form.status" />
                     </div>
-                    <div class="px-3">
-                        <FormKit type="number" label="Total" validation="required"
-                            label-class="block mb-2 font-bold text-sm"
-                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.total" />
-                    </div>
                 </div>
 
-                <div class="mx-3 md:flex mb-6">
+                <div v-for="(article, index) in form.articles" class="mx-3 md:flex mb-6">
                     <div class="md:w-1/3 px-3 mb-6 md:mb-0">
-                        <FormKit type="number" label="Total HTVA" validation="required"
-                            label-class="block mb-2 font-bold text-sm"
-                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.totalHTVA" />
+                        <FormKit type="select" label="Article" validation="required" placeholder="Choisissez un article"
+                            :options=articlesObj v-model="article.articleId" />
                     </div>
                     <div class="mx-3 px-3 mb-6 md:mb-0">
-                        <FormKit type="select" label="Article" validation="required" placeholder="Choisissez un article"
-                            :options=articlesObj v-model="form.article_id" />
+                        <FormKit type="number" label="Quantité" validation="required"
+                                 label-class="block mb-2 font-bold text-sm"
+                                 inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                                 input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                                 v-model="article.quantite" />
                     </div>
+                    <button @click="addArticle" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                    </button>
+                    <button @click="removeArticle(index)" type="button" v-if="index != 0">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
+                        </svg>
+                    </button>
+
                 </div>
             </FormKit>
         </div>
@@ -99,8 +103,14 @@ export default {
     },
     methods: {
         submitHandler() {
-            console.log(this.form)
             Inertia.post(route('commandes.store'), this.form);
+            console.log(this.form)
+        },
+        addArticle() {
+            this.form.articles.push({articleId: '', quantite: ''});
+        },
+        removeArticle(index) {
+            this.form.articles.splice(index, 1);
         }
 
     },
@@ -113,10 +123,12 @@ export default {
             dateCommande: "",
             dateLivraison: "",
             status: "",
-            total: "",
-            totalHTVA: "",
-            stock: "",
-            articles: "",
+            articles: [
+                {
+                    articleId: '',
+                    quantite: ''
+                }
+            ],
         });
         const fournisseurArray = Object.values(props.fournisseurs);
         const fournisseursObj = fournisseurArray.reduce((previousObject, fournisseur) => ({ ...previousObject, [fournisseur.id]: fournisseur.nom }), {});
