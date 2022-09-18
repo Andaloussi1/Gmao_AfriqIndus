@@ -3,7 +3,7 @@
     <AppLayout title=" commande">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                informations du {{form.titre}} 
+                informations du {{form.titre}}
             </h2>
 
         </template>
@@ -12,8 +12,7 @@
         <div class="md:flex items-start justify-center py-12 2xl:px-20 md:px-6 px-4">
             <div class="xl:w-2/5 md:w-1/2 lg:ml-8 md:ml-6 md:mt-0 mt-6">
                 <div class="border-b border-gray-200 pb-6">
-                    <p class="text-sm leading-none text-gray-600 dark:text-gray-300 ">Titre : {{form.titre}}</p>
-                    <h1 class="lg:text-2xl text-xl font-semibold lg:leading-6 leading-7 text-gray-800 dark:text-white mt-2"> Nom: {{form.nom}}</h1>
+                    <h1 class="lg:text-2xl text-xl font-semibold lg:leading-6 leading-7 text-gray-800 dark:text-white mt-2">Titre : {{form.titre}}</h1>
                 </div>
                 <div class="py-4 border-b border-gray-200 flex items-center justify-between">
                     <p class="text-base leading-4 text-gray-800 dark:text-gray-300">Description : </p>
@@ -32,10 +31,30 @@
                 </div>
                 <div><br>
                     <p class="text-base leading-4 mt-7 text-gray-600 dark:text-gray-300">Date Commande : {{form.dateCommande}}</p>
-                    <p class="text-base leading-4 mt-4 text-gray-600 dark:text-gray-300">Date Livrasion : {{form.dateLivraison}}%</p>
+                    <p class="text-base leading-4 mt-4 text-gray-600 dark:text-gray-300">Date Livrasion : {{form.dateLivraison}}</p>
                     <p class="text-base leading-4 mt-4 text-gray-600 dark:text-gray-300">Status : {{form.status}}</p>
-                    <p class="md:w-96 text-base leading-normal text-gray-600 dark:text-gray-300 mt-4">Total : {{form.total}}</p>
-                    <p class="md:w-96 text-base leading-normal text-gray-600 dark:text-gray-300 mt-4">Total HTVA : {{form.totalHTVA}}</p>
+                    <br>
+                    <div class="bg-slate-400">
+                        <table class="border-collapse table-auto w-full text-sm">
+                            <thead>
+                                <tr>
+                                    <th class="border-b border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-50 text-left">Article</th>
+                                    <th class="border-b border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-50 text-left">Prix</th>
+                                    <th class="border-b border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-50  text-left">Quantité</th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="bg-slate-800">
+                                <tr v-for="article in ligneCommande">
+                                    <td class="border-b border-slate-700 p-4 pl-8 text-slate-400">{{article.nom}}</td>
+                                    <td class="border-b border-slate-700 p-4 pl-8 text-slate-400">{{article.prix}}</td>
+                                    <td class="border-b border-slate-700 p-4 pl-8 text-slate-400">{{article.quantite}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="md:w-96 text-base leading-normal text-gray-600 dark:text-gray-300 mt-4">Total : {{calculateTotal().totalTVA}}</p>
+                    <p class="md:w-96 text-base leading-normal text-gray-600 dark:text-gray-300 mt-4">Total HTVA : {{calculateTotal().totalHTVA}}</p>
                 </div>
 
             </div>
@@ -53,6 +72,7 @@ import AppLayout from '@/Layouts/AppLayout.vue'
 export default {
     props:{
         commande:Object,
+        ligneCommande:Object,
     },
     data(){
         return{
@@ -87,6 +107,19 @@ export default {
             } else{
                 this.showData1=false
             }
+        },
+        calculateTotal() {
+            let total = {
+                totalHTVA: 0,
+                totalTVA: 0,
+            };
+
+            this.$props.ligneCommande.forEach((article) => {
+                var prixLigne = article.prix * article.quantite;
+                total.totalHTVA += prixLigne;
+                total.totalTVA += prixLigne + prixLigne * article.tauxTVA * 0.01;
+            })
+            return total;
         },
     },
     components: {Link, AppLayout},

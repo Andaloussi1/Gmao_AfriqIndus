@@ -13,6 +13,11 @@
                 submit-label="Ajouter"
                 @submit="submitHandler"
             >
+            <div class="text-red-600" v-if="Object.keys(errors).length">
+                    <ul v-for="error in errors">
+                        <li>{{ error }}</li>
+                    </ul>
+                </div>
                 <div class="mx-3 md:flex mb-6">
                     <div class="px-3">
                         <FormKit
@@ -150,6 +155,7 @@ import AppLayout from '@/Layouts/AppLayout.vue'
 export default {
     props:{
         fournisseur: Object,
+        errors : Object,
 
     },
     methods: {

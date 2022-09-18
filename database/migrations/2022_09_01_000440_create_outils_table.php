@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bon_commandes', function (Blueprint $table) {
+        Schema::create('outils', function (Blueprint $table) {
             $table->id();
-            $table->string('titre');
-            $table->date('date');
-            $table->string('description');
-            $table->date('date_livraison');
-            $table->string('status');
-            $table->string('adresse_livraison');
-            $table->foreignId("fournisseur_id")->constrained();
+            $table->string('reference');
+            $table->string('nom');
+            $table->string('marque');
+            $table->string('type');
+            $table->integer('stock');
+            $table->integer('stockLoue');
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bon_commandes');
+        Schema::dropIfExists('outils');
     }
 };

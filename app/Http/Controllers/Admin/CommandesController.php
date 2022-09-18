@@ -7,6 +7,7 @@ use App\Models\Article;
 use App\Models\Commande;
 use App\Models\Fournisseur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use ProtoneMedia\LaravelQueryBuilderInertiaJs\InertiaTable;
@@ -24,7 +25,7 @@ class CommandesController extends Controller
     {
         $commandes = QueryBuilder::for(Commande::class)
             ->defaultSort('titre')
-            ->allowedSorts(['titre', 'description', 'adresseLivraison', 'dateCommande','dateLivraison','status','total','totalHTVA'])
+            ->allowedSorts(['titre', 'description', 'adresseLivraison', 'dateCommande','dateLivraison','status'])
             ->allowedFilters(['titre', 'adresseLivraison'])
             ->paginate()
             ->withQueryString();
@@ -41,8 +42,6 @@ class CommandesController extends Controller
                 ->column(key: 'dateCommande', sortable: true)
                 ->column(key: 'dateLivraison', sortable: true)
                 ->column(key: 'status', sortable: true)
-                ->column(key: 'total', sortable: true)
-                ->column(key: 'totalHTVA', sortable: true)
                 ->column(label: 'Actions');
         });
     }
@@ -106,15 +105,6 @@ class CommandesController extends Controller
                 'alpha_num',
                 'max:255'
             ],
-
-            'total' => [
-                'required',
-                'numeric',
-            ],
-            'totalHTVA' => [
-                'required',
-                'numeric',
-            ],
         ]);
 
         $commande = Commande::create([
@@ -124,11 +114,24 @@ class CommandesController extends Controller
             'dateCommande' => $request->dateCommande,
             'dateLivraison' => $request->dateLivraison,
             'status' => $request->status,
-            'total' => $request->total,
-            'totalHTVA' => $request->totalHTVA,
         ]);
+        $articles = collect($request->articles)
+                    ->map(function($article) {
+                        return [((object) $article)->articleId => ((object) $article)->quantite];
+        });
+        $articles = collect($articles)
+            ->groupBy(function ($article) {
+                return collect($article)->keys()->first();
+            })
+            ->map(function ($article) {
+                return ['quantite' => collect($article)->flatten()->sum()];
+            });
 
-        $commande->articles()->attach($request->articles);
+        $articles->each(function ($article, $id) {
+            Article::find($id)->increment('niveauStock', ((object) $article)->quantite);
+        });
+
+        $commande->articles()->sync($articles);
 
 
 
@@ -144,8 +147,17 @@ class CommandesController extends Controller
      */
     public function show(Commande $commande)
     {
+        $articles = $commande->articles;
+        $ligneCommande = array();
+
+        foreach ($articles as $article) {
+            $ligneCommande[] = (object) ['nom' => $article->nom, 'tauxTVA' => $article->fournisseur->tauxTVA,
+                                'quantite' => $article->pivot->quantite, 'prix' => $article->prixAchat];
+        }
+
         return Inertia::render('Commandes/Show', [
             'commande' => $commande,
+            'ligneCommande' => $ligneCommande,
         ]);
     }
 
@@ -239,11 +251,11 @@ class CommandesController extends Controller
      */
     public function destroy(Commande $commande)
     {
-
+        $commande->articles->each(function ($article) {
+           $article->decrement('niveauStock', $article->pivot->quantite);
+        });
         $commande->articles()->detach();
         $commande->delete();
-
-
 
         return Redirect::route('commandes.index');
     }

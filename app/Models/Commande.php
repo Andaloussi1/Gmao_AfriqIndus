@@ -9,11 +9,11 @@ class Commande extends Model
 {
     use HasFactory;
 
-    protected $fillable=['titre','description','adresseLivraison','dateCommande','dateLivraison','status','total','totalHTVA','articles'];
+    protected $fillable=['titre','description','adresseLivraison','dateCommande','dateLivraison','status','articles'];
 
     public function articles(): BelongsToMany
     {
-        return $this->belongsToMany(Article::class);
-        //Or: return $this->hasMany(Post::class, 'foreign_key');
+        return $this->belongsToMany(Article::class)
+                ->withPivot(['quantite']);
     }
 }

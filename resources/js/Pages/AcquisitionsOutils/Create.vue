@@ -1,9 +1,11 @@
+
+
 <template>
 
-    <AppLayout title=" Article">
+    <AppLayout title="Acquesition d'Outil">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Modifier Article
+                 Acquérir un outil
             </h2>
 
         </template>
@@ -14,107 +16,108 @@
                 submit-label="Ajouter"
                 @submit="submitHandler"
             >
-            <div class="text-red-600" v-if="Object.keys(errors).length">
-                    <ul v-for="error in errors">
-                        <li>{{ error }}</li>
-                    </ul>
-                </div>
-                
-              <div class="mx-3 md:flex mb-6">
+                <div class="mx-3 md:flex mb-6">
                     <div class="px-3 mb-6 md:mb-0">
                         <FormKit
-                            Total="text"
-                            label="Titre"
+                            type="select"
+                            validation="required"
+                            :options=outilsObj
+                            label="Outil"
+                            placeholder="Choisissez un outil"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.titre"
+                            v-model="form.outil_id"
                         />
                     </div>
                     <div class="px-3">
                         <FormKit
-                            Total="text"
-                            label="Description"
+                            type="checkbox"
+                            label="Louer"
+                            wrapper-class="mt-6"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.description"
+                            v-model="form.louer"
                         />
                     </div>
-                    <div class="px-3">
+                    <div class="px-3" v-if=form.louer>
                         <FormKit
-                            Total="text"
-                            label="Adresse Livraisn"
+                            type="number"
+                            label="Periode"
+                            validation="required"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.adresseLivraison"
+                            v-model="form.periode"
                         />
                     </div>
-                    <div class="px-3">
+                    <div class="px-3" v-if=form.louer>
                         <FormKit
-                            Total="date"
-                            label="Date Commande"
+                            type="select"
+                            placeholder="Jours/Mois/Ans"
+                            :options="{
+                                mois: 'Mois',
+                                jours: 'Jours',
+                                ans: 'Ans',
+                            }"
+                            validation="required"
+                            label="Periodicité"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.dateCommande"
+                            v-model="form.periodicite"
                         />
                     </div>
                 </div>
                 <div class="mx-3 md:flex mb-6">
                     <div class="px-3 mb-6 md:mb-0">
                         <FormKit
-                            Total="date"
-                            label="Date Livraison"
+                            type="date"
+                            label="Date"
+                            validation="required"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.dateLivraison"
+                            v-model="form.date"
                         />
                     </div>
-                    <div class="px-3">
+                    <div class="px-3 mb-6 md:mb-0">
                         <FormKit
-                            Total="text"
-                            label="Status"
+                            type="number"
+                            label="Quantite"
+                            validation="required"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.status"
+                            v-model="form.quantite"
                         />
                     </div>
-                </div>
+                    <div class="px-3 mb-6 md:mb-0">
+                        <FormKit
+                            type="number"
+                            label="Prix"
+                            validation="required"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            v-model="form.prix"
+                        />
+                    </div>
+                    <div class="px-3 mb-6 md:mb-0">
+                        <FormKit
+                            type="select"
+                            label="Fournisseur"
+                            validation="required"
+                            placeholder="Choisissez un fournisseur"
+                            label-class="block mb-2 font-bold text-sm"
+                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
+                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                            :options=fournisseursObj
+                            v-model="form.fournisseur_id"
+                        />
+                    </div>
 
-                <div class="mx-3 md:flex mb-6">
-                    <div class="md:w-1/3 px-3 mb-6 md:mb-0">
-                        <FormKit
-                            Total="number"
-                            label="Total"
-                            label-class="block mb-2 font-bold text-sm"
-                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.total"
-                        />
-                    </div>
-                    <div class="md:w-1/3 px-3">
-                        <FormKit
-                            Total="number"
-                            label="Total HTVA"
-                            label-class="block mb-2 font-bold text-sm"
-                            inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
-                            input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                            v-model="form.totalHTVA"
-                        />
-                    </div>
-                    <div class="mx-3 px-3 mb-6 md:mb-0">
-                     <FormKit
-                         type="select"
-                         label="Article"
-                         placeholder="Choisissez une Article"
-                         :options=articlesObj
-                         v-model="form.article_id"
-                       />
-                    </div>
                 </div>
             </FormKit>
         </div>
@@ -122,51 +125,38 @@
     </AppLayout>
 </template>
 <script>
-import {FormKit} from '@formkit/vue'
 import {Inertia} from '@inertiajs/inertia'
 import {useForm, Link} from '@inertiajs/inertia-vue3'
 import AppLayout from '@/Layouts/AppLayout.vue'
-
-
+import {FormKit} from '@formkit/vue'
 export default {
-    props:{
-        commande:Object,
-        articles:Object,
-        errors:Object,
-    },
-
     methods: {
-        submitHandler(){
-            console.log(this.form);
-            Inertia.put(route('commandes.update', this.$props.commande.id), this.form);
+        submitHandler() {
+            Inertia.post(route('acquisitionsoutils.store'), this.form);
         },
+    },
+    props: {
+        fournisseurs:Object,
+        outils:Object,
     },
 
     setup(props) {
         const form = useForm({
-            titre: props.commande.titre,
-            description: props.commande.description,
-            adresseLivraison: props.commande.adresseLivraison,
-            dateCommande: props.commande.dateCommande,
-            dateLivraison: props.commande.dateLivraison,
-            status: props.commande.status,
-            total: props.commande.total,
-            totalHTVA: props.commande.totalHTVA,
-            article_id: props.commande.article_id,
-
+            outil_id: "",
+            fournisseur_id: "",
+            prix: "",
+            louer: false,
+            periode: "",
+            periodicite: "",
+            date: "",
+            quantite: "",
         });
-        const articleArray = Object.values(props.articles);
-        const articlesObj = articleArray.reduce((previousObject, article) => ({
-            ...previousObject,
-            [article.id]: article.nom
-         }), {});
-        return {form,articlesObj};
+        const fournisseurArray = Object.values(props.fournisseurs);
+        const fournisseursObj = fournisseurArray.reduce((previousObject, fournisseur) => ({ ...previousObject, [fournisseur.id]: fournisseur.nom}), {});
+        const outilArray = Object.values(props.outils);
+        const outilsObj = outilArray.reduce((previousObject, outil) => ({ ...previousObject, [outil.id]: outil.nom}), {});
+        return {form, outilsObj, fournisseursObj};
     },
-
     components: {Link, AppLayout, FormKit},
 }
 </script>
-
-
-
-
