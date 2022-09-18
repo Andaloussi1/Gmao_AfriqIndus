@@ -141,7 +141,8 @@
                         <div class="mx-3 md:flex mb-6">
                             <div class="px-3">
                                 <FormKit type="text" label="Nom" label-class="block mb-2 font-bold text-sm"
-                                    :validation="[['required'], ['matches', /^[A-zÀ\s]+$/]]" :validation-messages="{
+                                    :validation="[['required'], ['matches', /^[A-zÀ-ú\s]+$/]]" 
+                                    :validation-messages="{
                                         matches: 'Nom ne doit pas contenir des chiffres',
                                     }"
                                     inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
@@ -252,9 +253,12 @@ export default {
         submitHandler() {
             Inertia.post(route('articles.store'), this.form);
         }, fournisseurSubmitHandler() {
-            Inertia.post(route('fournisseurs.modal'), this.fournisseurForm);
+            Inertia.post(route('fournisseurs.modal'), this.fournisseurForm, {
+                onSuccess:() => Inertia.get(route('articles.create')),
+            });
+            this.isHidden = false;
 
-            this.isHidden = false
+
             //Inertia.post(route('fournisseurs.store'), this.fournisseurForm);
         },
     },

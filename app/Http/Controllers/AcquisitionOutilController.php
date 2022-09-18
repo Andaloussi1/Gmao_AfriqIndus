@@ -124,10 +124,11 @@ class AcquisitionOutilController extends Controller
      * @param  \App\Models\AcquisitionOutil  $acquisitionOutil
      * @return \Illuminate\Http\Response
      */
-    public function edit(AcquisitionOutil $acquisitionOutil)
+    public function edit($id)
     {
+        $acquisitionOutils = AcquisitionOutil::find($id);
         return Inertia::render('AcquisitionsOutils/Edit', [
-            'acquisitionOutil' => $acquisitionOutil,
+            'acquisitionOutils' => $acquisitionOutils,
         ]);
     }
 

@@ -10,23 +10,33 @@
 
         <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex items-center justify-center my-2">
             <FormKit type="form" submit-label="Ajouter" @submit="submitHandler">
+
+                <div class="text-red-600" v-if="Object.keys(errors).length">
+                    <ul v-for="error in errors">
+                        <li>{{ error }}</li>
+                    </ul>
+                </div>
+
                 <div class="mx-3 md:flex mb-6">
                     <div class="px-3 mb-6 md:mb-0">
-                        <FormKit type="text" label="Titre" validation="required | alpha"
+                        <FormKit type="text" label="Titre"
+                            :validation="[['required'], ['matches', /^[A-zÀ-ú\s]+$/]]"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
                             v-model="form.titre" />
                     </div>
                     <div class="px-3">
-                        <FormKit type="text" label="Description" validation="required|alphanumeric"
+                        <FormKit type="text" label="Description" 
+                            :validation="[['required'], ['matches', /^[A-zÀ-ú0-9\s]+$/]]"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
                             v-model="form.description" />
                     </div>
                     <div class="px-3">
-                        <FormKit type="text" label="Adresse Livraison" validation="required|alphanumeric"
+                        <FormKit type="text" label="Adresse Livraison"
+                            :validation="[['required'], ['matches', /^[A-zÀ-ú0-9\s]+$/]]"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -100,6 +110,7 @@ export default {
         commande: Object,
         articles: Object,
         fournisseurs: Object,
+        errors:Object,
     },
     methods: {
         submitHandler() {

@@ -16,11 +16,18 @@
                 submit-label="Modifier"
                 @submit="submitHandler"
             >
+            <div class="text-red-600" v-if="Object.keys(errors).length">
+                    <ul v-for="error in errors">
+                        <li>{{ error }}</li>
+                    </ul>
+                </div>
+
                 <div class="mx-3 md:flex mb-6">
                     <div class="px-3 mb-6 md:mb-0">
                         <FormKit
                             type="text"
                             label="Reference"
+                            validation="required"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -31,6 +38,7 @@
                         <FormKit
                             type="text"
                             label="Nom"
+                            validation="required|alphanumeric"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -41,6 +49,7 @@
                         <FormKit
                             type="text"
                             label="Marque"
+                            validation="required"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -51,6 +60,7 @@
                         <FormKit
                             type="text"
                             label="Type"
+                            validation="required"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -59,8 +69,9 @@
                     </div>
                     <div class="px-3">
                         <FormKit
-                            type="text"
-                            label="Type"
+                            type="number"
+                            label="Stock"
+                            validation="required | numeric"
                             label-class="block mb-2 font-bold text-sm"
                             inner-class="max-w-md border border-gray-400 rounded-lg mb-3 overflow-hidden focus-within:border-blue-500"
                             input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
@@ -82,6 +93,7 @@ import {FormKit} from '@formkit/vue'
 export default {
     props:{
         outil:Object,
+        errors:Object,
     },
     methods: {
         submitHandler() {
